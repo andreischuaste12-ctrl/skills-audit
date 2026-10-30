@@ -2,7 +2,9 @@
 
 ## Reporting a vulnerability
 
-Use "Report a vulnerability" in the repository's Security tab on GitHub (private reporting). That feature depends on the maintainer having enabled it in the repository settings, which has not been verified. If the option does not appear, open an issue asking for a private channel, without exploitable details.
+Use "Report a vulnerability" in the repository's Security tab on GitHub (private reporting). That feature depends on the maintainer having enabled it in the repository settings, which has not been verified.
+
+If the option does not appear, **do not open an issue about the vulnerability**, not even without details: that would disclose that one exists. Contact the maintainer privately through the contact method listed on their GitHub profile (https://github.com/andreischuaste12-ctrl), if one is listed. If neither channel is available, this repository does not currently offer a secure reporting channel: wait until one is enabled instead of disclosing publicly.
 
 Include: the affected file and excerpt, the condition under which it occurs, the impact, and steps to reproduce, with no real credentials.
 

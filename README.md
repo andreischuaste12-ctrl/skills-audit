@@ -67,13 +67,13 @@ python3 scripts/validate.py
 python3 -m unittest discover -s scripts -p "test_*.py"
 ```
 
-The first command parses the frontmatter and `agents/openai.yaml` with a YAML parser (a duplicate key is an error) and checks types, links, cited paths, evals (structure, types, conditional fields), fixtures (relative paths inside `evals/files` only), line endings, and the description. Any symlink is an error and its destination is not read. Each problem is reported with a file and a reason; JSON or YAML with the wrong structure produces a readable error, never a traceback. Without PyYAML, the validator exits with code 2 and installation instructions. The second command injects defects on purpose and checks that the validator detects them.
+The first command parses the frontmatter and `agents/openai.yaml` with a YAML parser (a duplicate key is an error) and checks types, links, cited paths, evals (structure, types, conditional fields), fixtures (relative paths inside `evals/files` only), line endings, and the description. Any symlink is an error and its destination is not read; a directory that cannot be read is an error, not a silent skip. Each problem is reported with a file and a reason; JSON or YAML with the wrong structure produces a readable error, never a traceback. Without PyYAML, the validator exits with code 2 and installation instructions. The second command injects defects on purpose and checks that the validator detects them.
 
 ## Verification status
 
 | Level | What it is | Status |
 | --- | --- | --- |
-| Structural | Files, YAML, JSON, links, metadata | Automated. The `validate` workflow passed on commits `bffb94f`, `005bc20`, and `cc93212` (checked on 2026-10-30), the last on Python 3.11, 3.12, and 3.13; the current commit still has to pass CI after the push |
+| Structural | Files, YAML, JSON, links, metadata | Automated. The `validate` workflow passed on commits `bffb94f`, `005bc20`, `cc93212`, and `dcaf013` (checked on 2026-10-30); since `cc93212` it runs on Python 3.11, 3.12, and 3.13. The current commit still has to pass CI after the push |
 | Walkthrough | The workflow applied manually to a scenario | Not recorded |
 | Behavioral execution | An agent runs the scenario on the host, with and without the skill | **Not recorded** (see `evals/RESULTS.md`) |
 
@@ -96,7 +96,7 @@ If only one host is tested, it will be declared the only validated host.
 - 6 of the 7 sources in `references/research-and-validation.md` were not opened at the last check (2026-10-30); only the Claude Code documentation was read, partially.
 - Branch protection requiring the `validate` checks is a GitHub setting and was not verified.
 - CI validates structure only; validating behavior needs an agent and costs tokens, so it runs manually (see `RELEASING.md`), not on every PR.
-- The workflow actions use tags (`@v4`, `@v5`), not immutable SHAs.
+- The workflow actions are pinned to the SHAs the runner resolved for `@v4` and `@v5` on 2026-10-30. The runner warns that both actions target Node.js 20 and run forced on Node.js 24, so move to newer releases once verified. Pins do not update themselves.
 
 ## Publishing a change
 
@@ -104,7 +104,7 @@ Details and versioning criteria are in `RELEASING.md`. Summary:
 
 1. Run the two validation commands.
 2. If you changed `SKILL.md`, references, fixtures, or criteria, run the affected scenarios with and without the skill and record them in `evals/RESULTS.md`.
-3. Block publication on a structural error or a critical failure (list in `evals/RESULTS.md`).
+3. Block publication on a structural error, a critical failure with the skill, or a regression against the baseline (see `evals/RESULTS.md`).
 4. Update `CHANGELOG.md` and record the version's limitations.
 5. Check the result of the `validate` workflow on the published commit and, to make the check mandatory, require the `structure` job checks (one per Python version) in GitHub branch protection.
 

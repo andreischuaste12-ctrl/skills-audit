@@ -23,4 +23,4 @@ Both commands must pass. CI runs the same checks on Python 3.11, 3.12, and 3.13.
 
 ## Security
 
-For vulnerabilities, see `SECURITY.md`; do not open a public issue with exploitable details.
+For vulnerabilities, see `SECURITY.md`; do not open a public issue about a vulnerability, with or without details.

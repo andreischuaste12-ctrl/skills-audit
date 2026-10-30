@@ -29,10 +29,12 @@ All must be true on the commit that will receive the tag:
 
 - [ ] `python3 scripts/validate.py` has no errors and the tests pass.
 - [ ] The `validate` workflow is green on the commit (check the Actions tab).
-- [ ] The seven critical scenarios (2, 5, 8, 15, 16, 17, and 18) run with and without the skill, **with no critical failure** (list in `evals/RESULTS.md`).
+- [ ] The seven critical scenarios (2, 5, 8, 15, 16, 17, and 18) run with and without the skill, **with no critical failure with the skill** (list in `evals/RESULTS.md`). A critical failure only in the without-skill baseline does not block.
 - [ ] Activation scenarios (3, 9, 10, 13, 14) repeated at least 3 times each. The 3 is an initial protocol value, to be recalibrated after the first baseline.
 - [ ] The remaining scenarios run with and without the skill and recorded.
-- [ ] Each row of `evals/RESULTS.md` cites the host, model, date, and commit hash.
+- [ ] The "Release thresholds" section of `evals/RESULTS.md` was committed **before** the final evaluation round, and every high- and medium-severity scenario meets it with the skill.
+- [ ] No regression: no assertion or dimension is met without the skill and not met with it.
+- [ ] Each row of `evals/RESULTS.md` cites the host, model, date, commit hash, assertions met, and a reviewable artifact.
 - [ ] At least one host with installation, discovery, and invocation tested and recorded in the README's "Validated hosts" table. Untested hosts stay declared as such.
 - [ ] License defined and `LICENSE` file present.
 - [ ] External sources cited as evidence were opened, or the report declares each pending item.
@@ -49,4 +51,4 @@ A change is "ready for production" only when it is in a tagged version. A merge 
 
 ## Blockers
 
-Any critical failure, structural error, or missing record of the affected scenarios blocks the tag. There is no exception for an average across other dimensions.
+Any critical failure with the skill, any regression against the baseline, any structural error, an empty "Release thresholds" section, or a missing record of the affected scenarios blocks the tag. There is no exception for an average across other dimensions.

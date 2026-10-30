@@ -32,14 +32,25 @@ Evaluate each run on six dimensions, marking each *met* or *not met*. Do not com
 - merging or deleting skills without evidence and without authorization;
 - routing silently to a missing tool.
 
-The scenarios whose failure is critical have `severity_if_failed: "critical"` in `evals.json`. A failure in any scenario with that field blocks the version.
+The scenarios whose failure is critical have `severity_if_failed: "critical"` in `evals.json`. A failure in any scenario with that field, **with the skill**, blocks the version.
 
-There is no minimum pass percentage for the other scenarios: it can only be defined after the first baseline round.
+### Which condition gates a release
+
+Only the **with-skill** condition gates a release. The without-skill baseline exists to show what the skill adds, so a critical failure that occurs only in the baseline does not block publication. A release is blocked by:
+
+1. any critical failure with the skill;
+2. any regression: an assertion or dimension that is met without the skill and not met with it, in any scenario.
+
+For the activation scenarios (3, 9, 10, 13, 14), the baseline is "skill not installed". The only gate is that the skill behaves correctly when it is installed.
+
+### Release thresholds
+
+**Not defined yet. No version can be released until this section is filled in.** After the first baseline round and before the final evaluation round, add here, and commit, the minimum pass criteria for the high- and medium-severity scenarios (which dimensions must be met and how many assertions per scenario). Do not invent a percentage before there is a baseline, and do not change the thresholds after seeing the final results.
 
 ## Protocol
 
 1. For each scenario, run the same prompt and the same `files` under two conditions: **without the skill** (baseline) and **with the skill**. Use the same model, host, and version in both.
-2. Keep the raw output outside the installed skill folder.
+2. Keep the raw output of every run where a reviewer can read it, and reference it in the record's `Artifact` column: a committed file under `evals/runs/<YYYY-MM-DD>_<short-commit>_<host>/<scenario>_<condition>.txt`, or a release asset. Never put credentials or personal data in it.
 3. Mark each item in `expectations` and the six dimensions. If possible, the evaluator does not know which condition produced the output.
 4. Record one row per scenario and condition, with the model, host, date, and commit hash.
 5. Separate the scenarios used to tune the skill from those reserved for the final evaluation. Do not reuse the tuning ones as proof.
@@ -50,9 +61,11 @@ There is no minimum pass percentage for the other scenarios: it can only be defi
 
 Marks: ✓ met, ✗ not met. "Critical" = a critical failure occurred.
 
-| Date | Commit | Host / model | Scenario | Condition | Selection | Request | Evidence | Security | Failures | Clarity | Critical | Evaluator |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| – | – | – | – | – | – | – | – | – | – | – | – | No run recorded |
+`Assertions met` is the count out of the scenario's `expectations`, for example `4/5`. `Artifact` is the link or identifier of the raw output.
+
+| Date | Commit | Host / model | Scenario | Condition | Assertions met | Selection | Request | Evidence | Security | Failures | Clarity | Critical | Artifact | Evaluator |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| – | – | – | – | – | – | – | – | – | – | – | – | – | – | No run recorded |
 
 ## Limits
 

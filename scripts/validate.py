@@ -56,6 +56,13 @@ def rel(root, path):
     return path.relative_to(root).as_posix()
 
 
+def display(root, path):
+    try:
+        return Path(path).relative_to(root).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def is_within(path, base):
     try:
         path.resolve().relative_to(base.resolve())
@@ -112,7 +119,12 @@ def load_yaml(text, label):
 def scan(root):
     """List regular files without following symlinks; symlinks become errors and are not read."""
     files = []
-    for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+
+    def on_error(e):  # os.walk skips unreadable directories silently unless told otherwise
+        reason = e.strerror or type(e).__name__
+        err(f"{display(root, e.filename)}: directory could not be read ({reason}); its contents were not validated")
+
+    for dirpath, dirnames, filenames in os.walk(root, followlinks=False, onerror=on_error):
         base = Path(dirpath)
         dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
         for d in list(dirnames):

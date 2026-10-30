@@ -13,8 +13,13 @@ Format: newest versions first. No version has been released yet.
 - Routing rule for when `skill-creator` is not available.
 - Single finding schema, research limits, and a sources table with check status.
 - `LICENSE` (MIT), `CONTRIBUTING.md`, `SECURITY.md`, `RELEASING.md`, and `.github/pull_request_template.md`.
+- Validator and tests for unreadable directories (`os.walk` now reports them).
+- "Release thresholds" section and release-gate rules in `evals/RESULTS.md` and `RELEASING.md`; `Assertions met` and `Artifact` columns in the run record.
 
 ### Changed
+- CI actions pinned to the SHAs the runner resolved on 2026-10-30.
+- Only the with-skill condition and regressions against the baseline gate a release.
+- `SECURITY.md`: no public issue as a fallback for reporting a vulnerability.
 - The entire project is now in English: documentation, `SKILL.md`, references, evals, fixtures, validator messages, and tests. The skill responds in the language of the user's request.
 - The collections reference was renamed from `colecoes-e-unificacao.md` to `collections-and-merging.md`.
 - `evals/evals.json`: every scenario has `type`, `objective`, `expectations`, `forbidden`, `allowed_changes`, and `severity_if_failed`; the enum values are now `activation`, `execution`, `security`, `regression` and `critical`, `high`, `medium`.

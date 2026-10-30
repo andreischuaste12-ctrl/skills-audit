@@ -4,6 +4,7 @@ Usage: python3 -m unittest discover -s scripts -p "test_*.py"
 Requires PyYAML (pip install -r requirements-dev.txt).
 Each test copies the project to a temporary directory and injects a defect.
 """
+import importlib.util
 import json
 import os
 import re
@@ -13,10 +14,18 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 VALIDATE = ROOT / "scripts" / "validate.py"
 MARKER = "LEAK_MARKER"
+
+
+def load_validator():
+    spec = importlib.util.spec_from_file_location("validate_under_test", VALIDATE)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def copy_project(dst):
@@ -270,6 +279,34 @@ class ValidatorTest(unittest.TestCase):
         self.link(self.outside / "skill.md", self.root / "SKILL.md")
         out = self.assertDetects("SKILL.md: ")
         self.assertNotIn(MARKER, out)
+
+    # --- unreadable directories ------------------------------------------
+    def test_unreadable_directory_is_reported_not_skipped(self):
+        # os.walk reports nothing by default; this checks the onerror wiring even when running as root.
+        module = load_validator()
+        target = os.fspath(self.root.resolve() / "references")
+        real_scandir = os.scandir
+
+        def fake_scandir(path="."):
+            if os.fspath(path) == target:
+                raise PermissionError(13, "Permission denied", target)
+            return real_scandir(path)
+
+        with mock.patch("os.scandir", side_effect=fake_scandir):
+            module.scan(self.root.resolve())
+        self.assertTrue(
+            any("directory could not be read" in e and "references" in e for e in module.errors), module.errors
+        )
+
+    def test_permission_denied_directory_fails_validation(self):
+        folder = self.root / "references"
+        folder.chmod(0o000)
+        try:
+            if os.access(folder, os.R_OK):
+                self.skipTest("permissions are not enforced (running as root)")
+            self.assertDetects("directory could not be read")
+        finally:
+            folder.chmod(0o755)
 
     # --- line endings ----------------------------------------------------
     def test_crlf_produces_a_warning(self):
