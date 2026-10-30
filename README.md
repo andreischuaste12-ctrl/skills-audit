@@ -11,7 +11,7 @@ Language: English. The skill responds in the language of the user's request. Ver
 Scope decisions, set by the maintainer on 2026-10-30:
 
 - **Audience:** a public open source project, for people who maintain personal or team skills and need to decide what to fix, merge, or retire. Contributions follow `CONTRIBUTING.md`; vulnerabilities, `SECURITY.md`.
-- **Primary host:** Claude Code. Codex is a secondary target, because of `agents/openai.yaml`. Neither has compatibility proven by execution (see "Verification status"). Format compatibility (the files follow the skill structure) is not behavior compatibility (the agent behaves as expected).
+- **Primary host:** Claude Code. Codex is a secondary target, because of `agents/openai.yaml`. Claude Code 2.1.314 was smoke-tested on 2026-10-30; Codex was not tested (see "Verification status"). Format compatibility (the files follow the skill structure) is not behavior compatibility (the agent behaves as expected).
 - **Default deliverable:** findings with location, evidence, severity, and confidence; a recommendation per skill; changes made; checks run and not run.
 
 ### This skill or `skill-creator`?
@@ -75,24 +75,24 @@ The first command parses the frontmatter and `agents/openai.yaml` with a YAML pa
 | --- | --- | --- |
 | Structural | Files, YAML, JSON, links, metadata | Automated. The `validate` workflow passed on commits `bffb94f`, `005bc20`, `cc93212`, and `dcaf013` (checked on 2026-10-30); since `cc93212` it runs on Python 3.11, 3.12, and 3.13. The current commit still has to pass CI after the push |
 | Walkthrough | The workflow applied manually to a scenario | Not recorded |
-| Behavioral execution | An agent runs the scenario on the host, with and without the skill | **Not recorded** (see `evals/RESULTS.md`) |
+| Behavioral execution | An agent runs the scenario on the host, with and without the skill | **Partial.** A smoke test and the 7 critical scenarios were run on Claude Code 2.1.314 on 2026-10-30; the other 14 scenarios were not (see `evals/RESULTS.md`) |
 
-An evaluation scenario is not an execution: until there are rows in `evals/RESULTS.md`, there is no evidence of performance or of host compatibility.
+An evaluation scenario is not an execution: only the scenarios with rows in `evals/RESULTS.md` have evidence behind them.
 
 ### Validated hosts
 
-None. A host enters this table only after installation, discovery, and invocation have been tested, with the smoke test recorded.
+Claude Code 2.1.314 is the only validated host. A host enters this table only after installation, discovery, and invocation have been tested, with the smoke test recorded.
 
 | Host | Installation procedure | Discovery | Invocation | Smoke test | Date |
 | --- | --- | --- | --- | --- | --- |
-| Claude Code (primary) | not tested | not tested | not tested | not run | – |
+| Claude Code 2.1.314 (primary) | README procedure without `evals/` and `scripts/`: works | Listed in the skills loaded at session start | Audit prompt invoked it; an SEO-store prompt did not; a create-from-scratch prompt went to `skill-creator` | 3 of 3 prompts as expected (one run each); see "Run notes" in `evals/RESULTS.md` | 2026-10-30 |
 | Codex (secondary) | not tested | not tested | not tested | not run | – |
 
 If only one host is tested, it will be declared the only validated host.
 
 ## Known limitations
 
-- No behavioral execution recorded.
+- Behavioral execution is partial: 7 of 21 scenarios were run, one run per condition. With the skill installed, it was invoked in only 7 of 14 critical runs (never in scenarios 5, 15, and 17), so its benefit shows only when it activates. Grades were given by the same model family, not blind.
 - 6 of the 7 sources in `references/research-and-validation.md` were not opened at the last check (2026-10-30); only the Claude Code documentation was read, partially.
 - Branch protection requiring the `validate` checks is a GitHub setting and was not verified.
 - CI validates structure only; validating behavior needs an agent and costs tokens, so it runs manually (see `RELEASING.md`), not on every PR.

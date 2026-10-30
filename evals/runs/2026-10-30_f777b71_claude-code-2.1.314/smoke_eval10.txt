@@ -1,0 +1,46 @@
+# run 61317dde32
+
+[init] model=claude-sonnet-5-5 claude_code=2.1.314 permission_mode=acceptEdits
+[init] skills=['improve-skills-konvert', 'skill-creator', 'deep-research', 'design', 'design-sync', 'dataviz', 'update-config', 'verify', 'debug', 'code-review', 'simplify', 'batch', 'fewer-permission-prompts', 'doctor', 'loop', 'schedule', 'claude-api', 'workflow-authoring', 'run', 'run-skill-generator', 'plugin-authoring']
+[init] tools=['Task', 'Bash', 'CronCreate', 'CronDelete', 'CronList', 'DesignSync', 'Edit', 'EnterWorktree', 'ExitWorktree', 'ListAgents', 'Monitor', 'NotebookEdit', 'PushNotification', 'Read', 'RemoteTrigger', 'ReportFindings', 'ScheduleWakeup', 'SendMessage', 'Skill', 'TaskStop', 'ToolSearch', 'WebFetch', 'WebSearch', 'Workflow', 'Write']
+
+TOOL_USE Skill: {"skill": "skill-creator"}
+
+TOOL_RESULT: Launching skill: skill-creator
+
+ASSISTANT:
+I'll write the skill directly and keep the test loop light, since the budget is limited.
+
+TOOL_USE Write: {"file_path": "<run>/instagram-content-planner/SKILL.md", "content": "---\nname: instagram-content-planner\ndescription: Plan Instagram content for a brand, creator, or business — content pillars, a posting calendar, post/Reel/Carousel/Story ideas, captions, hashtags, and a posting cadence. Use this whenever the user mentions planning, scheduling, or brainstorming Instagram posts, a content calendar, \"what should I post\", growing an Instagram account, Reels ideas, carousels, or a social media plan that includes Instagram, even if they don't say \"content calendar\".\n---\n\n# Instagram Content Planner\n\nProduce a plan the user can execute this week, not a generic list of tips. A good plan is specific to their audience, realistic for their capacity, and tied to one goal.\n\n## 1. Gather inputs (ask only what's missing)\n\nPull what you can from the conversation, then ask briefly (one message, max ~5 questions) for the rest:\n\n- **Account/niche**: who they are, what they sell or share\n- **Audience**: who they want to reach, and what that audience cares about\n- **Goal**: one primary goal (followers, sales/leads, community, authority, traffic)\n- **Capacity**: posts per week, who creates content, can they appear on camera, budget/tools\n- **Planning window**: default to 4 weeks if unstated\n- **Existing signals**: what has worked before, brand voice, any launches/events/date
+
+TOOL_RESULT: File created successfully at: <run>/instagram-content-planner/SKILL.md (file state is current in your context — no need to Read it back)
+
+TOOL_USE Write: {"file_path": "<run>/instagram-content-planner/evals/evals.json", "content": "{\n  \"skill_name\": \"instagram-content-planner\",\n  \"evals\": [\n    {\n      \"id\": 1,\n      \"prompt\": \"i run a small bakery in Austin (sourdough + pastries), about 1.2k followers. can only post 3x a week, just me and my phone. need a plan for November incl thanksgiving pie preorders\",\n      \"expected_output\": \"Pillars, 4-week calendar tied to pie preorders, realistic for 3 posts/week, week-1 captions\",\n      \"files\": []\n    },\n    {\n      \"id\": 2,\n      \"prompt\": \"I'm a freelance personal trainer who wants more online coaching clients. Give me 10 Reel ideas I can film in a gym with no editing skills.\",\n      \"expected_output\": \"Focused list of 10 Reel ideas with hooks and CTAs, no full calendar\",\n      \"files\": []\n    },\n    {\n      \"id\": 3,\n      \"prompt\": \"make me a content calendar for instagram\",\n      \"expected_output\": \"Asks few targeted questions or states explicit assumptions before producing a plan\",\n      \"files\": []\n    }\n  ]\n}\n"}
+
+TOOL_RESULT: File created successfully at: <run>/instagram-content-planner/evals/evals.json (file state is current in your context — no need to Read it back)
+
+ASSISTANT:
+I wrote the Instagram content planning skill, but I haven't run it. I skipped the baseline comparisons, the review viewer and the description tuning to stay within the budget.
+
+The skill is `instagram-content-planner/`, in the working directory. It has two files:
+- `SKILL.md`
+- `evals/evals.json`
+
+**What the skill does**
+- **Inputs:** it asks only for what's missing: niche, audience, one goal, posting capacity and planning window. If the user wants speed, it states its assumptions and goes ahead.
+- **Strategy:** it sets 3–5 content pillars, a format mix (Reels, carousels, Stories) and a posting cadence that fits the user's capacity.
+- **Calendar:** weekly tables with the pillar, format, hook, core message and a single call to action for each post.
+- **Week-1 detail:** caption drafts, hashtags or keywords, alt text and production notes.
+- **Measurement:** it names the metrics that match the goal and suggests a review after the planning window.
+- **One-off requests:** for something like "10 Reel ideas" it skips the full structure and delivers just that.
+- **Triggering:** the description is deliberately broad, so it should trigger on mentions of Instagram posts, calendars, Reels ideas or "what should I post".
+
+**Test prompts (in `evals/evals.json`, no assertions yet)**
+1. A bakery with 3 posts a week and a Thanksgiving pie-preorder push.
+2. A personal trainer asking for 10 Reel ideas.
+3. A vague "make me a content calendar for instagram", to check that it asks questions or states assumptions.
+
+If you want the full loop, I can run these three with and without the skill and open the review viewer. After that I can tune the description with `run_loop`.
+
+[result] subtype=success is_error=False turns=5 cost_usd=0.11433770000000001
+[result] permission_denials=[]

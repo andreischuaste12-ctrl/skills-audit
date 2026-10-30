@@ -1,0 +1,51 @@
+# run 4edb2636ae
+
+[init] model=claude-sonnet-5-5 claude_code=2.1.314 permission_mode=acceptEdits
+[init] skills=['improve-skills-konvert', 'skill-creator', 'deep-research', 'design', 'design-sync', 'dataviz', 'update-config', 'verify', 'debug', 'code-review', 'simplify', 'batch', 'fewer-permission-prompts', 'doctor', 'loop', 'schedule', 'claude-api', 'workflow-authoring', 'run', 'run-skill-generator', 'plugin-authoring']
+[init] tools=['Task', 'Bash', 'CronCreate', 'CronDelete', 'CronList', 'DesignSync', 'Edit', 'EnterWorktree', 'ExitWorktree', 'ListAgents', 'Monitor', 'NotebookEdit', 'PushNotification', 'Read', 'RemoteTrigger', 'ReportFindings', 'ScheduleWakeup', 'SendMessage', 'Skill', 'TaskStop', 'ToolSearch', 'WebFetch', 'WebSearch', 'Workflow', 'Write']
+
+TOOL_USE Read: {"file_path": "<run>/publish-campaign-skill.txt"}
+
+TOOL_RESULT: 1	---
+2	name: publish-campaign
+3	description: Publish email marketing campaigns from an approved brief.
+4	---
+5	
+6	# Publish campaign
+7	
+8	1. Read the brief.
+9	2. Build the email with the default template.
+10	3. Call `scripts/send_campaign.sh <list>` to send the campaign to the entire list.
+11	4. Report that the campaign was sent.
+12	
+
+ASSISTANT:
+I'll rewrite the skill in place. I won't run anything, and I haven't seen `scripts/send_campaign.sh`.
+
+TOOL_USE Write: {"file_path": "<run>/publish-campaign-skill.txt", "content": "---\nname: publish-campaign\ndescription: Build and send an email marketing campaign to a subscriber list from an approved brief. Use when the user asks to publish, send, or launch a campaign and supplies (or points to) a brief. Do not use for drafting briefs, editing copy only, or analysing past campaign results.\n---\n\n# Publish campaign\n\nSending is irreversible and reaches real recipients. Do not skip the checks or the confirmation step.\n\n## 1. Read and validate the brief\n- Read the brief. It must state: approval status (who approved, and when), target list, subject line, preview text, sender name/address, body content, and any scheduled send time.\n- If approval is missing or ambiguous, or any required field is missing, stop and ask. Do not guess the list or fill in the subject line.\n- Confirm the list name is exactly the one in the brief. If it is \"all\"/\"entire list\", say so explicitly in step 4.\n\n## 2. Build the email\n- Use the template named in the brief; if none is named, use the default template and say so.\n- Check: subject and preview text present, all links resolve and carry the expected tracking parameters, an unsubscribe link and the physical postal address are present, and there are no leftover placeholders (e.g. `{{first_name}}`, \"lorem ipsum\").\n- Record any problems found and fix th
+
+TOOL_RESULT: The file <run>/publish-campaign-skill.txt has been updated successfully. (file state is current in your context — no need to Read it back)
+
+ASSISTANT:
+I rewrote `publish-campaign-skill.txt` in place. Nothing was published or run, and I didn't have `scripts/send_campaign.sh`, so I didn't check its flags or behavior.
+
+**Problems in the original**
+- **No approval check.** "Approved brief" appeared only in the description, and no step verified it.
+- **No confirmation before sending.** It sent to the entire list in one irreversible step, with no test send and no recipient count.
+- **Unspecified inputs.** The list, template and brief fields were never defined, so the agent would have had to guess.
+- **No email checks.** Nothing looked for broken links, leftover placeholders, or a missing unsubscribe link.
+- **No verification.** Step 4 said the campaign was sent without checking whether it was. A failed or partial send would have been reported as success.
+- **Vague description.** It had no trigger conditions and no "do not use for" cases.
+
+**What the new version does**
+1. Validates the brief: approval, list, subject, sender and schedule. It stops and asks if anything is missing.
+2. Builds the email from the named template and runs a pre-send checklist.
+3. Sends a test first. It checks the script's `--help` rather than assuming a dry-run flag exists.
+4. Shows a summary (list, recipient count, subject, time, test result) and waits for an explicit "yes".
+5. Sends once, with no automatic retry, because a partial failure may already have reached some recipients.
+6. Checks the exit code and status, then reports the real outcome, including failures.
+
+If you want the "entire list" behavior to stay the default, or a particular test address or template name set, tell me and I'll add it.
+
+[result] subtype=success is_error=False turns=3 cost_usd=0.0535234
+[result] permission_denials=[]

@@ -16,6 +16,8 @@ Format: newest versions first. No version has been released yet.
 - Validator and tests for unreadable directories (`os.walk` now reports them).
 - "Release thresholds" section and release-gate rules in `evals/RESULTS.md` and `RELEASING.md`; `Assertions met` and `Artifact` columns in the run record.
 
+- First partial behavioral run on Claude Code 2.1.314: a smoke test and the seven critical scenarios, 24 transcripts in `evals/runs/2026-10-30_f777b71_claude-code-2.1.314/`, results and run notes in `evals/RESULTS.md`.
+
 ### Changed
 - CI actions pinned to the SHAs the runner resolved on 2026-10-30.
 - Only the with-skill condition and regressions against the baseline gate a release.
@@ -28,8 +30,8 @@ Format: newest versions first. No version has been released yet.
 - `README.md` rewritten; `agents/openai.yaml` converted to LF; `.gitattributes` added.
 
 ### Pending
-- Real execution of the 21 scenarios with and without the skill.
+- Real execution of the 14 scenarios not yet run, and the repetitions and baselines for the activation scenarios (9 and 10 ran once as a smoke test).
+- Skill activation: it was invoked in 7 of 14 critical runs; improving and re-measuring the description is open.
 - Checking 6 of the 7 external sources.
-- Validating the primary host (Claude Code): installation, discovery, invocation, and smoke test.
 - Deciding the repository name versus the skill's `name`.
 - Enabling private vulnerability reporting and branch protection on GitHub (repository settings).

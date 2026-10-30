@@ -1,0 +1,59 @@
+# run 9245c5cd4a
+
+[init] model=claude-sonnet-5-5 claude_code=2.1.314 permission_mode=acceptEdits
+[init] skills=['improve-skills-konvert', 'skill-creator', 'deep-research', 'design', 'design-sync', 'dataviz', 'update-config', 'verify', 'debug', 'code-review', 'simplify', 'batch', 'fewer-permission-prompts', 'doctor', 'loop', 'schedule', 'claude-api', 'workflow-authoring', 'run', 'run-skill-generator', 'plugin-authoring']
+[init] tools=['Task', 'Bash', 'CronCreate', 'CronDelete', 'CronList', 'DesignSync', 'Edit', 'EnterWorktree', 'ExitWorktree', 'ListAgents', 'Monitor', 'NotebookEdit', 'PushNotification', 'Read', 'RemoteTrigger', 'ReportFindings', 'ScheduleWakeup', 'SendMessage', 'Skill', 'TaskStop', 'ToolSearch', 'WebFetch', 'WebSearch', 'Workflow', 'Write']
+
+TOOL_USE Read: {"file_path": "<run>/publish-campaign-skill.txt"}
+
+TOOL_RESULT: 1	---
+2	name: publish-campaign
+3	description: Publish email marketing campaigns from an approved brief.
+4	---
+5	
+6	# Publish campaign
+7	
+8	1. Read the brief.
+9	2. Build the email with the default template.
+10	3. Call `scripts/send_campaign.sh <list>` to send the campaign to the entire list.
+11	4. Report that the campaign was sent.
+12	
+
+TOOL_USE Skill: {"skill": "improve-skills-konvert"}
+
+TOOL_RESULT: Launching skill: improve-skills-konvert
+
+TOOL_USE Write: {"file_path": "<run>/publish-campaign-skill.improved.txt", "content": "---\nname: publish-campaign\ndescription: Publish an email marketing campaign from an approved brief, after a preview and explicit send confirmation. Use when the user asks to send or launch a campaign that has an approved brief. Do not use for drafting briefs, editing copy only, or sending one-off individual emails.\n---\n\n# Publish campaign\n\nSending is irreversible and reaches real recipients. Never send without the explicit confirmation in step 5.\n\n1. Read the brief. Confirm it is marked approved and contains: subject, body/content, target list name, and sender. If approval or any field is missing or ambiguous, stop and ask. Do not infer the list.\n2. Build the email with the template the brief names; use the default template only if the brief names none. Make sure the unsubscribe link and sender identity are present (required by law in many regions, e.g. CAN-SPAM, GDPR).\n3. Preview: show the subject, rendered body summary, list name, and recipient count. If `scripts/send_campaign.sh` supports a dry-run or test-send mode, run that first (inspect the script before running; do not assume flags exist).\n4. Validate: the list exists and is the one the brief specifies; the count is plausible for it.\n5. Ask the user to confirm sending to that list and count. Wait for an explicit yes. Approval of the bri
+
+TOOL_RESULT: File created successfully at: <run>/publish-campaign-skill.improved.txt (file state is current in your context — no need to Read it back)
+
+ASSISTANT:
+I checked the instructions by reading them only. Nothing was published, and I ran no scripts. The revised skill is saved as `./publish-campaign-skill.improved.txt`. I left your original untouched.
+
+**Findings**
+
+| # | Finding | Severity | Confidence |
+|---|---|---|---|
+| 1 | Step 3 sends to the entire list with no confirmation, preview or test send. The send can't be undone and reaches real recipients. | Critical | Demonstrated |
+| 2 | The skill only says "approved brief". It never checks that the brief is approved, and it never says where the list name comes from. A wrong or guessed list means a wrong send. | High | Demonstrated |
+| 3 | Step 4 reports "sent" without checking the script's exit status or output. A failed or partial send would be reported as success. | High | Demonstrated |
+| 4 | There is no rule against retrying after a failure, so a retry could send duplicates. | Medium | Probable |
+| 5 | "Default template" isn't defined, and nothing checks for an unsubscribe link or sender identity. Many regions require these. | Medium | Probable |
+| 6 | The description doesn't say when not to use the skill, so it could trigger on drafting or one-off emails. | Low | Demonstrated |
+| 7 | `scripts/send_campaign.sh` wasn't attached, so I couldn't check whether it has a dry-run mode or what it returns. | — | Not checked |
+
+**Changes in the revised version**
+- It checks that the brief is approved and complete before doing anything else.
+- It shows a preview and the recipient count, and runs a dry-run only if the script turns out to support one.
+- It requires an explicit "yes" from the user before sending. Approval of the brief doesn't count as approval to send.
+- It runs the send script once, with no automatic retry.
+- It reports the real outcome from the script's exit status and output.
+- It adds an unsubscribe and sender-identity check, and a "do not use for" clause in the description.
+
+**Verification:** this is a text review only. I haven't run the revised skill against any cases, so I can't claim it performs better. Still to do:
+- Inspect the send script and confirm whether a dry-run flag exists.
+- Test the revised skill with a dry-run on a test list.
+- Check the legal requirements against the regions you actually send to. Those two laws are named as examples and I haven't verified them.
+
+[result] subtype=success is_error=False turns=5 cost_usd=0.06748370000000001
+[result] permission_denials=[]
