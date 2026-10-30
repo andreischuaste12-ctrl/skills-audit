@@ -1,0 +1,10 @@
+---
+name: sales-report-a
+description: Generate a weekly e-commerce sales report from an orders CSV, with revenue, average order value and top products.
+---
+
+# Sales report A
+
+1. Read the orders CSV.
+2. Compute revenue, average order value and the top ten products.
+3. Deliver a Markdown table.

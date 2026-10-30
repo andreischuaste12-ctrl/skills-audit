@@ -1,11 +1,11 @@
-<!-- origem: ~/.claude/skills/summarize/SKILL.md (escopo pessoal, editável pelo usuário) -->
+<!-- origin: ~/.claude/skills/summarize/SKILL.md (personal scope, editable by the user) -->
 ---
 name: summarize
-description: Resumir documentos longos em português, em até dez tópicos, com citação da página de origem. Usar quando o usuário anexar um PDF ou texto e pedir resumo.
+description: Summarize long documents in ten topics or fewer, citing the source page. Use when the user attaches a PDF or text and asks for a summary.
 ---
 
-# Resumir
+# Summarize
 
-1. Ler o documento inteiro.
-2. Listar até dez tópicos, cada um com a página de origem.
-3. Sinalizar trechos ilegíveis em vez de preenchê-los.
+1. Read the whole document.
+2. List up to ten topics, each with its source page.
+3. Flag unreadable passages instead of filling them in.

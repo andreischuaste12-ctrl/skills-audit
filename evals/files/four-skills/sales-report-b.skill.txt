@@ -1,0 +1,10 @@
+---
+name: sales-report-b
+description: Summarize an online store's weekly sales from an orders spreadsheet: revenue, average order value and best-selling products.
+---
+
+# Sales report B
+
+1. Open the orders spreadsheet.
+2. Compute revenue, average order value and the ten best-selling products.
+3. Deliver a Markdown table.

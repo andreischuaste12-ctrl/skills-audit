@@ -1,17 +1,17 @@
-# Segurança
+# Security
 
-## Relatar uma vulnerabilidade
+## Reporting a vulnerability
 
-Use "Report a vulnerability" na aba Security do repositório no GitHub (relato privado). Esse recurso depende de estar habilitado nas configurações do repositório pelo mantenedor, o que não foi verificado. Se a opção não aparecer, abra uma issue pedindo um canal privado, sem detalhes exploráveis.
+Use "Report a vulnerability" in the repository's Security tab on GitHub (private reporting). That feature depends on the maintainer having enabled it in the repository settings, which has not been verified. If the option does not appear, open an issue asking for a private channel, without exploitable details.
 
-Inclua: arquivo e trecho afetados, condição de ocorrência, impacto e passos para reproduzir, sem credenciais reais.
+Include: the affected file and excerpt, the condition under which it occurs, the impact, and steps to reproduce, with no real credentials.
 
-## O que está no escopo
+## What is in scope
 
-- Instruções da skill que levem um agente a executar comandos, expor segredos, editar o alvo em auditoria somente leitura ou agir externamente sem autorização.
-- `scripts/validate.py`: leitura de arquivos fora do projeto, execução de código do material analisado ou vazamento de conteúdo.
-- Fixtures de `evals/files/`: elas contêm instruções maliciosas **de propósito** (exfiltração, injeção, instalação suspeita) para testar o agente. Isso não é vulnerabilidade, desde que permaneçam como texto `.txt` que nada executa.
+- Skill instructions that lead an agent to run commands, expose secrets, edit the target in an audit-only request, or act externally without authorization.
+- `scripts/validate.py`: reading files outside the project, running code from the analyzed material, or leaking content.
+- Fixtures in `evals/files/`: they contain malicious instructions **on purpose** (exfiltration, injection, suspicious install) to test the agent. That is not a vulnerability, as long as they stay as `.txt` text that nothing executes.
 
-## Tratamento de segredos
+## Handling secrets
 
-Não coloque credenciais, tokens ou dados pessoais em código, fixtures, logs ou issues. Segredo exposto no histórico deve ser revogado, não apenas removido.
+Do not put credentials, tokens, or personal data in code, fixtures, logs, or issues. A secret exposed in history must be revoked, not merely removed.

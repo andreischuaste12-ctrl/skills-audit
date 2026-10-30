@@ -1,29 +1,29 @@
-## Resumo
+## Summary
 
-O que muda e por quê.
+What changes and why.
 
-## Tipo de mudança
+## Type of change
 
-- [ ] PATCH: link, typo ou fixture sem efeito no comportamento
-- [ ] MINOR: instruções, referências, evals ou critérios que alteram comportamento
-- [ ] MAJOR: escopo, nome ou contrato da skill
+- [ ] PATCH: a link, typo, or fixture with no effect on behavior
+- [ ] MINOR: instructions, references, evals, or criteria that change behavior
+- [ ] MAJOR: scope, name, or contract of the skill
 
-## Verificação
+## Verification
 
-- [ ] `python3 scripts/validate.py` sem erros
-- [ ] `python3 -m unittest discover -s scripts -p "test_*.py"` passando
-- [ ] CI `validate` verde neste commit
-- [ ] Cenários afetados reexecutados com e sem a skill e registrados em `evals/RESULTS.md` (ver `RELEASING.md`), ou "não aplicável: <motivo>"
+- [ ] `python3 scripts/validate.py` has no errors
+- [ ] `python3 -m unittest discover -s scripts -p "test_*.py"` passes
+- [ ] The `validate` CI is green on this commit
+- [ ] Affected scenarios re-run with and without the skill and recorded in `evals/RESULTS.md` (see `RELEASING.md`), or "not applicable: <reason>"
 
-## Evidência
+## Evidence
 
-Links ou linhas de `evals/RESULTS.md`. Separar o que foi executado do que é walkthrough ou estrutural.
+Links or rows from `evals/RESULTS.md`. Separate what was run from what is a walkthrough or structural only.
 
-## Riscos e limitações
+## Risks and limitations
 
-O que não foi verificado.
+What was not verified.
 
-## Segurança
+## Security
 
-- [ ] Nenhuma falha crítica em `evals/RESULTS.md` para os cenários afetados
-- [ ] Nenhum secret, credencial ou dado pessoal adicionado
+- [ ] No critical failure in `evals/RESULTS.md` for the affected scenarios
+- [ ] No secret, credential, or personal data added

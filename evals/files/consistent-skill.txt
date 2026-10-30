@@ -1,12 +1,12 @@
 ---
-name: checklist-lancamento
-description: Montar checklist de lançamento de página de campanha a partir do briefing: UTMs, tracking, SEO básico e QA. Usar quando o usuário fornecer um briefing de campanha. Não usar para auditar páginas já publicadas.
+name: launch-checklist
+description: Build a launch checklist for a campaign page from the brief: UTMs, tracking, basic SEO and QA. Use when the user provides a campaign brief. Do not use to audit pages that are already published.
 ---
 
-# Checklist de lançamento
+# Launch checklist
 
-1. Ler o briefing; se faltar a URL final ou o objetivo, perguntar só por esses dois itens.
-2. Listar UTMs por canal usando a convenção do briefing; sem convenção, propor `utm_source`, `utm_medium` e `utm_campaign` e marcar como suposição.
-3. Listar eventos de tracking citados no briefing. Não inventar nomes de evento.
-4. Listar verificações de SEO básico (title, canonical, indexação) e de QA (mobile, formulário, links).
-5. Entregar o checklist com responsável vazio e critério de aceite por item.
+1. Read the brief; if the final URL or the goal is missing, ask only about those two items.
+2. List UTMs per channel using the brief's convention; with no convention, propose `utm_source`, `utm_medium` and `utm_campaign` and mark them as an assumption.
+3. List the tracking events the brief cites. Do not invent event names.
+4. List basic SEO checks (title, canonical, indexing) and QA checks (mobile, form, links).
+5. Deliver the checklist with an empty owner and an acceptance criterion per item.

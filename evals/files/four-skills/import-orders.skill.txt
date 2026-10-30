@@ -1,0 +1,10 @@
+---
+name: import-orders
+description: Export orders from the store API to CSV, with pagination and retry. Use when the user needs the orders file; it produces no analysis.
+---
+
+# Import orders
+
+1. Authenticate to the API with the environment token.
+2. Paginate to the end and handle rate limits with retry.
+3. Write the CSV and report its path. Do not compute metrics.

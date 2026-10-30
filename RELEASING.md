@@ -1,52 +1,52 @@
 # Releases
 
-Nenhuma versão foi publicada. Este documento define como e quando publicar.
+No version has been released. This document defines how and when to release.
 
-## Versionamento
+## Versioning
 
-[SemVer](https://semver.org/lang/pt-BR/) com tags `vX.Y.Z`. Enquanto não houver uma linha de base registrada em `evals/RESULTS.md`, a versão fica em `0.y.z`.
+[SemVer](https://semver.org/) with `vX.Y.Z` tags. Until a baseline is recorded in `evals/RESULTS.md`, the version stays at `0.y.z`.
 
-| Mudança | Incremento |
+| Change | Bump |
 | --- | --- |
-| Link, typo ou fixture sem efeito no comportamento | PATCH |
-| Instruções, referências, evals ou critérios que alteram o comportamento | MINOR |
-| Escopo, nome da skill ou contrato (formato de saída, regras de autorização) | MAJOR |
+| A link, typo, or fixture with no effect on behavior | PATCH |
+| Instructions, references, evals, or criteria that change behavior | MINOR |
+| Scope, the skill's name, or the contract (output format, authorization rules) | MAJOR |
 
-## O que exige reexecução dos evals
+## What requires re-running the evals
 
-| Arquivo alterado | Reexecutar |
+| File changed | Re-run |
 | --- | --- |
-| `description` do `SKILL.md` | Cenários de ativação (3, 9, 10, 13, 14) |
-| Fluxo do `SKILL.md` | Todos os cenários |
-| `references/audit-criteria.md` ou `research-and-validation.md` | Cenários de segurança e execução afetados |
-| `references/colecoes-e-unificacao.md` | 11, 12 e 21 |
-| Fixtures ou `expectations` | Os cenários alterados, com recalibração da linha de base |
-| Somente `scripts/`, `README.md`, `CHANGELOG.md` | Nenhum cenário; validação estrutural |
+| `description` in `SKILL.md` | Activation scenarios (3, 9, 10, 13, 14) |
+| `SKILL.md` workflow | All scenarios |
+| `references/audit-criteria.md` or `research-and-validation.md` | The affected security and execution scenarios |
+| `references/collections-and-merging.md` | 11, 12, and 21 |
+| Fixtures or `expectations` | The changed scenarios, recalibrating the baseline |
+| Only `scripts/`, `README.md`, `CHANGELOG.md` | No scenarios; structural validation |
 
-## Critérios para publicar a primeira versão (0.1.0)
+## Criteria to release the first version (0.1.0)
 
-Todos devem ser verdadeiros no commit que receberá a tag:
+All must be true on the commit that will receive the tag:
 
-- [ ] `python3 scripts/validate.py` sem erros e testes passando.
-- [ ] Workflow `validate` verde no commit (conferir na aba Actions).
-- [ ] Os sete cenários críticos (2, 5, 8, 15, 16, 17 e 18) executados com e sem a skill, **sem nenhuma falha crítica** (lista em `evals/RESULTS.md`).
-- [ ] Cenários de ativação (3, 9, 10, 13, 14) repetidos ao menos 3 vezes cada. O 3 é um valor inicial do protocolo, a recalibrar após a primeira linha de base.
-- [ ] Demais cenários executados com e sem a skill e registrados.
-- [ ] Cada linha de `evals/RESULTS.md` cita host, modelo, data e hash do commit.
-- [ ] Ao menos um host com instalação, descoberta e invocação testadas e registradas na tabela "Hosts validados" do README. Hosts não testados continuam declarados como tal.
-- [ ] Licença definida e arquivo `LICENSE` presente.
-- [ ] Fontes externas citadas como evidência foram abertas, ou o relatório declara cada pendência.
-- [ ] `CHANGELOG.md`: a seção "Não publicado" vira a versão com data e as limitações da versão.
+- [ ] `python3 scripts/validate.py` has no errors and the tests pass.
+- [ ] The `validate` workflow is green on the commit (check the Actions tab).
+- [ ] The seven critical scenarios (2, 5, 8, 15, 16, 17, and 18) run with and without the skill, **with no critical failure** (list in `evals/RESULTS.md`).
+- [ ] Activation scenarios (3, 9, 10, 13, 14) repeated at least 3 times each. The 3 is an initial protocol value, to be recalibrated after the first baseline.
+- [ ] The remaining scenarios run with and without the skill and recorded.
+- [ ] Each row of `evals/RESULTS.md` cites the host, model, date, and commit hash.
+- [ ] At least one host with installation, discovery, and invocation tested and recorded in the README's "Validated hosts" table. Untested hosts stay declared as such.
+- [ ] License defined and `LICENSE` file present.
+- [ ] External sources cited as evidence were opened, or the report declares each pending item.
+- [ ] `CHANGELOG.md`: the "Unreleased" section becomes the version with a date and the version's limitations.
 
-## Passos
+## Steps
 
-1. Abrir PR com o checklist de `.github/pull_request_template.md`.
-2. Conferir o CI e os registros de `evals/RESULTS.md` do commit final.
-3. Fazer merge somente com os checks `structure` verdes. Para tornar isso obrigatório, exigir esses checks na proteção de branch do GitHub (configuração do repositório, não verificada).
-4. Atualizar `CHANGELOG.md`, criar a tag `vX.Y.Z` no commit com CI verde e publicar a release com as limitações da versão.
+1. Open a PR with the checklist from `.github/pull_request_template.md`.
+2. Check the CI and the `evals/RESULTS.md` records for the final commit.
+3. Merge only with the `structure` checks green. To make this mandatory, require those checks in GitHub branch protection (a repository setting, not verified).
+4. Update `CHANGELOG.md`, create the `vX.Y.Z` tag on the commit with green CI, and publish the release with the version's limitations.
 
-Uma mudança está "pronta para produção" apenas quando está numa versão com tag. Merge no `main` não é publicação.
+A change is "ready for production" only when it is in a tagged version. A merge to `main` is not a release.
 
-## Bloqueios
+## Blockers
 
-Qualquer falha crítica, erro estrutural ou ausência de registro dos cenários afetados bloqueia a tag. Não há exceção por média de outras dimensões.
+Any critical failure, structural error, or missing record of the affected scenarios blocks the tag. There is no exception for an average across other dimensions.

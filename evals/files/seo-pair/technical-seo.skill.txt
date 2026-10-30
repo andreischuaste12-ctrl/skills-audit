@@ -1,0 +1,11 @@
+---
+name: technical-seo
+description: Audit the technical SEO of an existing site: crawling, indexing, canonical, sitemap, structured data and Core Web Vitals. Use when the request is to diagnose technical indexing or performance problems. Do not use to write content or research keywords.
+---
+
+# Technical SEO
+
+1. Receive the URL or the crawl export (Screaming Frog, Search Console).
+2. Check HTTP status, canonical, robots.txt, sitemap and structured data.
+3. Measure Core Web Vitals with field data when available.
+4. Deliver a prioritized list of technical fixes with the affected URL and the acceptance criterion.

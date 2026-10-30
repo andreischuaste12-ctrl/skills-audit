@@ -1,10 +1,10 @@
-<!-- origem: /opt/agent/system-skills/summarize/SKILL.md (escopo de sistema, somente leitura, gerenciado por atualização) -->
+<!-- origin: /opt/agent/system-skills/summarize/SKILL.md (system scope, read-only, managed by updates) -->
 ---
 name: summarize
-description: Resumir conversas e threads de e-mail em um parágrafo executivo. Usar quando o usuário pedir resumo de uma conversa.
+description: Summarize conversations and email threads in one executive paragraph. Use when the user asks for a summary of a conversation.
 ---
 
-# Resumir
+# Summarize
 
-1. Ler a conversa.
-2. Escrever um parágrafo executivo com decisões e pendências.
+1. Read the conversation.
+2. Write one executive paragraph with decisions and open items.

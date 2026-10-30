@@ -1,82 +1,82 @@
-# Critérios de auditoria
+# Audit criteria
 
-Selecionar os itens aplicáveis ao alvo. Não adicionar todas as verificações ao texto de toda skill.
+Select the items that apply to the target. Do not add every check to every skill's text.
 
-## Propósito e ativação
+## Purpose and activation
 
-- Nome e descrição distinguem a skill de outras instaladas?
-- A descrição contém tarefa, contexto e sinais específicos de ativação, sem prometer capacidades indisponíveis?
-- Os limites evitam ativações em assuntos próximos? Uma skill de Clubes no YouTube, por exemplo, não deve assumir qualquer área de membros em site.
-- O corpo resolve a tarefa prometida? Os exemplos representam a linguagem real do usuário?
-- O trabalho continua coerente, sem absorver tarefas adjacentes só para parecer completo?
+- Do the name and description distinguish the skill from other installed ones?
+- Does the description contain the task, the context, and specific activation signals, without promising unavailable capabilities?
+- Do the limits prevent activation on neighboring subjects? A YouTube Memberships skill, for example, should not take over any members area on a website.
+- Does the body solve the promised task? Do the examples represent the user's real language?
+- Does the work stay coherent, without absorbing adjacent tasks just to look complete?
 
-## Conhecimento e decisões do domínio
+## Domain knowledge and decisions
 
-- Regras factuais, cálculos e exemplos estão corretos e contextualizados?
-- A skill distingue dados observados, suposições, estimativas e recomendações?
-- Há critérios de decisão concretos e tratamento das consequências de uma escolha?
-- São coletadas apenas informações que mudam a análise? Dados conectados e arquivos disponíveis são aproveitados antes de perguntar?
-- Regras variáveis por região, conta, versão ou data são verificadas na fonte adequada?
-- Exemplos numéricos declaram unidades, premissas e limites? Benchmarks têm origem e contexto?
-- O procedimento evita inventar eventos de tracking, IDs, endpoints, preços, regras e evidências?
+- Are factual rules, calculations, and examples correct and put in context?
+- Does the skill distinguish observed data, assumptions, estimates, and recommendations?
+- Are there concrete decision criteria and handling of the consequences of a choice?
+- Is only information that changes the analysis collected? Are connected data and available files used before asking?
+- Are rules that vary by region, account, version, or date checked at the appropriate source?
+- Do numeric examples state units, assumptions, and limits? Do benchmarks have an origin and context?
+- Does the procedure avoid inventing tracking events, IDs, endpoints, prices, rules, and evidence?
 
-## Execução e recuperação
+## Execution and recovery
 
-- O fluxo estabelece entradas, dependências, entregável e critério de término?
-- Há padrão recomendado quando várias abordagens servem, sem menus desnecessários?
-- Ferramentas citadas existem ou possuem descoberta/fallback explícitos?
-- Dados ausentes, entradas inválidas, acesso negado e indisponibilidade têm respostas úteis?
-- Integrações tratam autenticação, timeouts, rate limits, paginação, retries e idempotência quando pertinentes?
-- Operações irreversíveis e alterações externas respeitam a autorização vigente?
-- Decisões executáveis substituem expressões vazias como “garantir qualidade”?
+- Does the workflow establish inputs, dependencies, a deliverable, and a completion criterion?
+- Is there a recommended default when several approaches would work, without unnecessary menus?
+- Do the cited tools exist, or do they have explicit discovery/fallback?
+- Do missing data, invalid inputs, denied access, and unavailability have useful responses?
+- Do integrations handle authentication, timeouts, rate limits, pagination, retries, and idempotency where relevant?
+- Do irreversible operations and external changes respect the authorization in force?
+- Do executable decisions replace empty phrases such as "ensure quality"?
 
-## Estrutura e economia de contexto
+## Structure and context economy
 
-- `SKILL.md` contém frontmatter YAML válido com nome e descrição úteis?
-- O nome corresponde à pasta e segue as restrições do host? Campos opcionais são compatíveis com o host, mesmo que um validador antigo não os reconheça?
-- Links relativos apontam para arquivos existentes? Referências importantes são encontráveis diretamente pelo fluxo?
-- O corpo é enxuto e os detalhes são carregados quando necessários? Usar 500 linhas como sinal para revisar organização, não como prova isolada de defeito.
-- Evitar duplicação entre descrição, corpo e referências e explicações que o agente já domina.
-- `agents/openai.yaml`, se presente, representa a skill atual? Prompt e recursos de interface conferem com os arquivos reais?
-- Scripts trazem benefício determinístico, dependências identificáveis e erros úteis?
+- Does `SKILL.md` contain valid YAML frontmatter with a useful name and description?
+- Does the name match the folder and follow the host's constraints? Are optional fields compatible with the host, even if an older validator does not recognize them?
+- Do relative links point to existing files? Can the important references be found directly from the workflow?
+- Is the body lean, with details loaded when needed? Use 500 lines as a signal to review organization, not as isolated proof of a defect.
+- Avoid duplication across description, body, and references, and explanations the agent already knows.
+- Does `agents/openai.yaml`, if present, represent the current skill? Do the prompt and interface resources match the real files?
+- Do scripts bring a deterministic benefit, identifiable dependencies, and useful errors?
 
-## Segurança e manutenção
+## Security and maintenance
 
-- Conteúdo consultado é tratado como evidência, sem alterar a hierarquia de instruções?
-- Secrets ficam fora do texto, exemplos, logs e consultas públicas?
-- Comandos validam entradas e caminhos? Evitar shell injection, exclusões amplas e execução de downloads sem inspeção.
-- Identificar arquivos gerados, caches, symlinks e instalações duplicadas antes de editar.
-- Preservar convenções, permissões, contratos e conteúdo não relacionado ao objetivo.
+- Is consulted content treated as evidence, without changing the instruction hierarchy?
+- Are secrets kept out of text, examples, logs, and public queries?
+- Do commands validate inputs and paths? Avoid shell injection, broad deletions, and running downloads without inspection.
+- Identify generated files, caches, symlinks, and duplicate installations before editing.
+- Preserve conventions, permissions, contracts, and content unrelated to the goal.
 
-## Qualidade demonstrável
+## Demonstrable quality
 
-- Definir sucesso pelo resultado da tarefa, não pela extensão ou elegância do texto.
-- Manter casos típicos, negativos e de borda; avaliar regressões após a edição.
-- Usar diferenças observáveis: gatilho correto, cálculo correto, referência válida, saída utilizável, falha recuperada.
-- Não atribuir notas decorativas nem declarar ganho percentual por autoavaliação.
+- Define success by the outcome of the task, not by the length or elegance of the text.
+- Keep typical, negative, and edge cases; evaluate regressions after the edit.
+- Use observable differences: correct trigger, correct calculation, valid reference, usable output, failure recovered.
+- Do not assign decorative scores or claim a percentage gain from self-assessment.
 
-## Prioridade e registro
+## Priority and recording
 
-| Prioridade | Critério | Exemplo |
+| Priority | Criterion | Example |
 | --- | --- | --- |
-| Crítica | Risco concreto de dano ou exposição | Publicação de credenciais |
-| Alta | Uso bloqueado ou resultado materialmente incorreto | Script inexistente; regra central desatualizada |
-| Média | Falha frequente ou cobertura relevante ausente | Ignorar paginação; confundir dois domínios |
-| Baixa | Melhoria demonstrável de manutenção ou contexto | Repetição que ocupa o corpo sem orientar decisões |
+| Critical | Concrete risk of harm or exposure | Publishing credentials |
+| High | Use blocked or materially incorrect result | Nonexistent script; outdated core rule |
+| Medium | Frequent failure or relevant missing coverage | Ignoring pagination; confusing two domains |
+| Low | Demonstrable maintenance or context improvement | Repetition that fills the body without guiding decisions |
 
-## Esquema único de achado
+## Single finding schema
 
-Todo achado usa os mesmos campos, no relatório detalhado e no resumo:
+Every finding uses the same fields, in the detailed report and in the summary:
 
-| Campo | Conteúdo |
+| Field | Content |
 | --- | --- |
-| Local | Arquivo e trecho ou linha |
-| Condição | Quando ocorre |
-| Severidade | Crítica, Alta, Média ou Baixa (tabela acima) |
-| Confiança | Defeito demonstrado, risco provável ou melhoria opcional. Separada da severidade: um risco provável pode ser Crítico, e um defeito demonstrado pode ser Baixo |
-| Impacto | Efeito sobre o uso, o resultado ou a segurança |
-| Evidência | Observação reproduzível ou fonte; hipótese marcada como tal |
-| Correção | Alteração mínima proposta |
-| Teste de aceitação | Resultado observável que confirma a correção |
+| Location | File and excerpt or line |
+| Condition | When it occurs |
+| Severity | Critical, High, Medium, or Low (table above) |
+| Confidence | Demonstrated defect, probable risk, or optional improvement. Separate from severity: a probable risk can be Critical, and a demonstrated defect can be Low |
+| Impact | Effect on use, the result, or security |
+| Evidence | Reproducible observation or source; a hypothesis is marked as such |
+| Fix | Minimal proposed change |
+| Acceptance test | Observable result that confirms the fix |
 
-No resumo final, encadeie `achado → evidência → alteração → verificação`. Um critério sem problema observado não precisa virar achado.
+In the final summary, chain `finding → evidence → change → verification`. A criterion with no observed problem does not need to become a finding.

@@ -1,75 +1,75 @@
-# Pesquisa e validação
+# Research and validation
 
-## Preparar perguntas que mudam decisões
+## Prepare questions that change decisions
 
-Partir do objetivo e dos achados: a regra ainda vale? O endpoint existe nessa versão? Qual dado falta para calcular a recomendação? A descrição distingue o domínio? O comportamento falha mesmo ou a redação só parece incomum?
+Start from the goal and the findings: does the rule still hold? Does the endpoint exist in this version? What data is missing to compute the recommendation? Does the description distinguish the domain? Does the behavior really fail, or does the wording just look unusual?
 
-Relacionar cada pergunta a uma possível mudança e uma forma de verificação. Não pesquisar todo o setor sem conexão com decisões do fluxo.
+Tie each question to a possible change and a way to verify it. Do not research the whole industry with no connection to the workflow's decisions.
 
-## Quando pesquisar e até onde
+## When to research and how far
 
-- **Dispensam busca externa:** link quebrado, contradição interna, instrução insegura, frontmatter inválido e qualquer defeito comprovável no próprio arquivo.
-- **Exigem busca externa:** regra de plataforma, versão ou assinatura de API, política de região, limite ou campo específico de host, e qualquer afirmação factual que a skill auditada faça sobre o mundo.
-- **Limite padrão:** no máximo uma pergunta verificável por achado que dependa de fonte externa, e uma fonte primária por pergunta. Ampliar só quando a fonte for ambígua, estiver desatualizada ou divergir de outra fonte primária, e registrar o motivo da ampliação.
-- **Parada:** encerrar quando cada decisão material tiver fonte ou reprodução e cada incerteza restante estiver registrada como pendente.
+- **Need no external search:** a broken link, an internal contradiction, an unsafe instruction, invalid frontmatter, and any defect provable in the file itself.
+- **Require external search:** a platform rule, an API version or signature, a regional policy, a host-specific limit or field, and any factual claim the audited skill makes about the world.
+- **Default limit:** at most one verifiable question per finding that depends on an external source, and one primary source per question. Widen only when the source is ambiguous, outdated, or diverges from another primary source, and record the reason for widening.
+- **Stop:** end when each material decision has a source or reproduction and each remaining uncertainty is recorded as pending.
 
-## Buscar e confrontar evidências
+## Search and cross-check evidence
 
-1. Inspecionar documentação, código, testes e exemplos locais aplicáveis.
-2. Buscar documentação oficial do fornecedor ou mantenedor, especificações e pesquisas originais pertinentes.
-3. Abrir a página exata, conferir data, versão e contexto, e seguir referências necessárias. Resultados de busca são pistas, não comprovação.
-4. Para afirmações importantes ou contestadas, conferir evidência adicional ou reproduzir o comportamento. Não exigir duas fontes quando uma referência normativa inequívoca resolve a questão.
-5. Resolver divergências pelo ambiente efetivo, versão, autoridade da fonte e evidência de execução. Explicitar incertezas.
+1. Inspect the applicable local documentation, code, tests, and examples.
+2. Look up the vendor's or maintainer's official documentation, specifications, and relevant original research.
+3. Open the exact page, check the date, version, and context, and follow necessary references. Search results are leads, not proof.
+4. For important or contested claims, check additional evidence or reproduce the behavior. Do not require two sources when one unambiguous normative reference settles the question.
+5. Resolve divergences by the actual environment, version, source authority, and execution evidence. State uncertainties explicitly.
 
-Não enviar código privado, dados de cliente, credenciais ou termos internos sensíveis a buscas públicas. Buscar conceitos e termos sanitizados. Preferir conectores autorizados para dados privados e verificar ferramentas antes de assumir sua existência.
+Do not send private code, customer data, credentials, or sensitive internal terms to public searches. Search for concepts and sanitized terms. Prefer authorized connectors for private data and verify tools before assuming they exist.
 
-Manter um registro compacto fora da skill instalada:
+Keep a compact record outside the installed skill:
 
-| Pergunta/achado | Fonte ou reprodução | Data e versão | Decisão | Como verificar |
+| Question/finding | Source or reproduction | Date and version | Decision | How to verify |
 | --- | --- | --- | --- | --- |
-| Falha concreta | URL da seção ou arquivo/linha | Contexto aplicável | Alteração ou manutenção | Critério observável |
+| Concrete failure | Section URL or file/line | Applicable context | Change or keep | Observable criterion |
 
-Não substituir evidência por confiança verbal ou por link de busca. Inserir no material permanente somente fontes necessárias à execução futura. Evitar copiar grandes trechos de terceiros.
+Do not replace evidence with verbal confidence or a search link. Put into the permanent material only the sources needed for future execution. Avoid copying large excerpts from third parties.
 
-## Separar níveis de validação
+## Separate the validation levels
 
-**Estrutural:** parsing de YAML, restrições do host, links, presença de recursos e sintaxe dos arquivos alterados. Prova integridade básica, não qualidade das decisões.
+**Structural:** YAML parsing, host constraints, links, presence of resources, and the syntax of changed files. Proves basic integrity, not the quality of decisions.
 
-**Walkthrough manual:** aplicar o fluxo a um cenário e conferir decisões e resultado. Identifica lacunas, mas não mede confiabilidade de novas execuções do modelo.
+**Manual walkthrough:** apply the workflow to a scenario and check the decisions and the result. Identifies gaps, but does not measure the reliability of new model runs.
 
-**Execução real:** executar a skill no agente com entradas e critérios definidos, coletar saídas e comparar versões. Separar casos de desenvolvimento dos reservados quando o conjunto permitir. Não abrir outro agente nem consumir APIs pagas sem autorização aplicável.
+**Real execution:** run the skill in the agent with defined inputs and criteria, collect the outputs, and compare versions. Separate development cases from reserved ones when the set allows. Do not open another agent or consume paid APIs without applicable authorization.
 
-Cobrir uso normal, limite relevante e caso negativo. Para cálculos, incluir valores esperados; para scripts, exercitar erros pertinentes; para domínios de risco, ampliar proporcionalmente.
+Cover normal use, a relevant limit, and a negative case. For calculations, include expected values; for scripts, exercise relevant errors; for risk domains, widen proportionally.
 
-Comparar versões com os mesmos inputs e condições controladas. Se possível, ocultar a versão do avaliador para reduzir preferência por texto novo. Não generalizar a partir de um único sucesso. Se só houver walkthrough, chamar de walkthrough.
+Compare versions with the same inputs and controlled conditions. If possible, hide the version from the evaluator to reduce preference for new text. Do not generalize from a single success. If there is only a walkthrough, call it a walkthrough.
 
-## Verificar sem executar efeitos desnecessários
+## Verify without running unnecessary effects
 
-- Inspecionar comandos e dependências antes de executar scripts de terceiros.
-- Usar fixtures e mocks para integrações que publicam, enviam mensagens, cobram ou removem dados. Melhorar a instrução não autoriza executar a ação descrita.
-- Verificar primeiro os arquivos afetados; ampliar conforme o risco.
-- Rever o diff e conferir que a correção não tornou outro caminho inexequível.
-- Se faltar acesso, informar qual comportamento não foi confirmado. Não fabricar dados, fontes ou resultados para aprovar uma verificação.
+- Inspect commands and dependencies before running third-party scripts.
+- Use fixtures and mocks for integrations that publish, send messages, bill, or remove data. Improving the instruction does not authorize running the action it describes.
+- Check the affected files first; widen according to risk.
+- Review the diff and confirm the fix did not make another path unworkable.
+- If access is missing, report which behavior was not confirmed. Do not fabricate data, sources, or results to pass a check.
 
-## Fontes oficiais de partida
+## Official starting sources
 
-Revisadas em 26/10/2026. Gatilho de revisão: reconferir a lista a cada 90 dias ou antes, quando um host mudar de versão. Reabra a documentação ao depender de versões, suporte do host ou estado de produto; esta lista não substitui pesquisa da área de domínio da skill auditada. Não trate uma especificação portátil como garantia de suporte idêntico em Codex, Claude Code, API ou plugins.
+Reviewed on 2026-10-26. Review trigger: recheck the list every 90 days, or sooner when a host changes version. Reopen the documentation when depending on versions, host support, or product status; this list does not replace research in the audited skill's own domain. Do not treat a portable specification as a guarantee of identical support in Codex, Claude Code, the API, or plugins.
 
-Estar nesta lista não significa que a fonte foi consultada em uma auditoria: cite uma fonte como consultada apenas se a página foi aberta naquela execução. Se uma fonte não puder ser acessada, registre isso no relatório e mantenha a decisão como pendente.
+Being on this list does not mean the source was consulted in an audit: cite a source as consulted only if the page was opened in that run. If a source cannot be accessed, record that in the report and keep the decision pending.
 
-| Fonte | Tipo | Para que serve | Conferência registrada |
+| Source | Type | Purpose | Recorded check |
 | --- | --- | --- | --- |
-| [Agent Skills: Specification](https://agentskills.io/specification) | Normativa (formato portátil) | Estrutura e campos portáteis. Distinguir requisito da especificação de suporte concreto por host. | Não acessada em 30/10/2026 (host fora da rede liberada). |
-| [Claude Code: Skills](https://code.claude.com/docs/en/skills) | Documentação de host | Frontmatter, descoberta, invocação e arquivos auxiliares no Claude Code. | Aberta em 30/10/2026: `description` e `when_to_use` somam até 1.536 caracteres na listagem; `name` não precisa coincidir com a pasta; campos desconhecidos são ignorados. Em claude.ai e na Skills API, só `name`, `description`, `license`, `compatibility`, `metadata` e `allowed-tools` são aceitos. Parte final da página não lida. |
-| [OpenAI: Skills](https://developers.openai.com/api/docs/guides/tools-skills) | Documentação de plataforma | Formato, descoberta e organização de recursos para skills na API. Confirme à parte as convenções do ambiente local. | Não acessada em 30/10/2026 (host fora da rede liberada). |
-| [Agent Skills: Best practices for skill creators](https://agentskills.io/skill-creation/best-practices) | Recomendação | Conhecimento de execução, detalhe proporcional, divulgação progressiva e padrões recomendados em vez de menus. | Não acessada em 30/10/2026 (host fora da rede liberada). |
-| [Agent Skills: Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills) | Recomendação | Casos realistas, baseline sem skill ou com versão anterior e avaliação por comparação. | Não acessada em 30/10/2026 (host fora da rede liberada). |
-| [OpenAI: Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) | Recomendação do produto/modelo descrito (não regra universal) | Descrições curtas e precisas, divulgação progressiva e risco de instruções redundantes ou excessivas. | Não acessada em 30/10/2026 (host fora da rede liberada). Conferir a existência da página antes de depender dela. |
-| [OpenAI: Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices) | Recomendação / documentação de plataforma | Objetivos, conjuntos de casos e critérios verificáveis. A página informa mudanças de disponibilidade da plataforma Evals; verifique o aviso atual antes de recomendar API ou produto e prefira avaliações locais compatíveis quando o usuário só precisa validar uma skill. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+| [Agent Skills: Specification](https://agentskills.io/specification) | Normative (portable format) | Portable structure and fields. Distinguish a specification requirement from concrete per-host support. | Not accessed on 2026-10-30 (host outside the allowed network). |
+| [Claude Code: Skills](https://code.claude.com/docs/en/skills) | Host documentation | Frontmatter, discovery, invocation, and auxiliary files in Claude Code. | Opened on 2026-10-30: `description` and `when_to_use` together are capped at 1,536 characters in the listing; `name` need not match the folder; unknown fields are ignored. In claude.ai and the Skills API, only `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools` are accepted. The final part of the page was not read. |
+| [OpenAI: Skills](https://developers.openai.com/api/docs/guides/tools-skills) | Platform documentation | Format, discovery, and organization of resources for skills in the API. Confirm the local environment's conventions separately. | Not accessed on 2026-10-30 (host outside the allowed network). |
+| [Agent Skills: Best practices for skill creators](https://agentskills.io/skill-creation/best-practices) | Recommendation | Execution knowledge, proportional detail, progressive disclosure, and recommended defaults instead of menus. | Not accessed on 2026-10-30 (host outside the allowed network). |
+| [Agent Skills: Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills) | Recommendation | Realistic cases, a baseline without the skill or with the previous version, and comparison-based evaluation. | Not accessed on 2026-10-30 (host outside the allowed network). |
+| [OpenAI: Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) | Recommendation for the described product/model (not a universal rule) | Short, precise descriptions, progressive disclosure, and the risk of redundant or excessive instructions. | Not accessed on 2026-10-30 (host outside the allowed network). Confirm the page exists before depending on it. |
+| [OpenAI: Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices) | Recommendation / platform documentation | Goals, case sets, and verifiable criteria. The page reports changes in the availability of the Evals platform; check the current notice before recommending an API or product, and prefer compatible local evaluations when the user only needs to validate a skill. | Not accessed on 2026-10-30 (host outside the allowed network). |
 
-### Manutenção das fontes
+### Source maintenance
 
-- Ao incluir uma fonte, registrar o motivo de uso, o tipo (normativa, documentação de host, recomendação) e a data da conferência.
-- Ao depender de uma fonte em uma auditoria, reabrir a página e anotar data e versão quando a informação variar por produto ou host.
-- Separar regra normativa de recomendação ao justificar uma mudança. Recomendação sustenta melhoria opcional, não defeito.
-- Um verificador automático de links detecta URL inválida, mas não prova que o conteúdo é atual nem aplicável.
+- When adding a source, record the reason for using it, the type (normative, host documentation, recommendation), and the date of the check.
+- When depending on a source in an audit, reopen the page and note the date and version when the information varies by product or host.
+- Separate a normative rule from a recommendation when justifying a change. A recommendation supports an optional improvement, not a defect.
+- An automatic link checker detects an invalid URL, but does not prove that the content is current or applicable.

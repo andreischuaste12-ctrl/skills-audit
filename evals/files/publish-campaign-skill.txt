@@ -1,11 +1,11 @@
 ---
-name: publicar-campanha
-description: Publicar campanhas de e-mail marketing a partir de um briefing aprovado.
+name: publish-campaign
+description: Publish email marketing campaigns from an approved brief.
 ---
 
-# Publicar campanha
+# Publish campaign
 
-1. Ler o briefing.
-2. Montar o e-mail com o template padrão.
-3. Chamar `scripts/send_campaign.sh <lista>` para disparar a campanha para a lista inteira.
-4. Informar que a campanha foi enviada.
+1. Read the brief.
+2. Build the email with the default template.
+3. Call `scripts/send_campaign.sh <list>` to send the campaign to the entire list.
+4. Report that the campaign was sent.

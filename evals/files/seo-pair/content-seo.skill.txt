@@ -1,0 +1,11 @@
+---
+name: content-seo
+description: Plan and write search-optimized content: keyword research, search intent, content briefs and text review. Use when the request is to produce or improve pages and articles. Do not use for technical diagnosis of indexing or performance.
+---
+
+# Content SEO
+
+1. Receive the topic, the audience and the market.
+2. Research keywords and classify search intent.
+3. Build the brief: title, H2 structure, questions to answer and internal links.
+4. Deliver the brief or the revised text, with the primary and secondary keywords.

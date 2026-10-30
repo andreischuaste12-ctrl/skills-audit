@@ -1,33 +1,30 @@
 # Changelog
 
-Formato: versões mais recentes primeiro. Nenhuma versão foi publicada ainda.
+Format: newest versions first. No version has been released yet.
 
-## Não publicado
+## Unreleased
 
-### Adicionado
-- `scripts/validate.py` e `scripts/test_validate.py`: validação estrutural e testes com defeitos injetados.
-- Workflow `.github/workflows/validate.yml`.
-- `evals/RESULTS.md`: critérios de aprovação, falhas críticas e registro de execuções.
-- Evals 14 a 20 (skill-creator ausente, pacote com caminhos perigosos, symlink, comando de instalação suspeito, injeção de instrução, fato datado, metadados incompatíveis) e 18 fixtures.
-- Regra de encaminhamento quando `skill-creator` não está disponível.
-- Esquema único de achado, limites de pesquisa e tabela de fontes com status de conferência.
+### Added
+- `scripts/validate.py` and `scripts/test_validate.py`: structural validation and tests with injected defects (43 tests).
+- `requirements-dev.txt` (PyYAML 6.0.2).
+- GitHub Actions workflow `.github/workflows/validate.yml`, with a Python 3.11, 3.12, and 3.13 matrix, and a status badge.
+- `evals/RESULTS.md`: pass criteria, critical failures, and a record of runs.
+- Evals 14 to 21 (skill-creator missing, package with dangerous paths, symlink, suspicious install command, instruction injection, dated fact, mismatched metadata, homonyms resolved by path) and 18 fixtures.
+- Routing rule for when `skill-creator` is not available.
+- Single finding schema, research limits, and a sources table with check status.
+- `LICENSE` (MIT), `CONTRIBUTING.md`, `SECURITY.md`, `RELEASING.md`, and `.github/pull_request_template.md`.
 
-- `requirements-dev.txt` (PyYAML 6.0.2) e instalação no CI.
-- Eval 21 (homônimos com caminho indicado: edição só da skill pessoal).
-- Testes do validador para YAML truncado, tipo incorreto, chave duplicada, YAML de interface malformado, symlinks, fixtures fora de `evals/files` e estrutura inválida de `evals.json` (43 testes).
+### Changed
+- The entire project is now in English: documentation, `SKILL.md`, references, evals, fixtures, validator messages, and tests. The skill responds in the language of the user's request.
+- The collections reference was renamed from `colecoes-e-unificacao.md` to `collections-and-merging.md`.
+- `evals/evals.json`: every scenario has `type`, `objective`, `expectations`, `forbidden`, `allowed_changes`, and `severity_if_failed`; the enum values are now `activation`, `execution`, `security`, `regression` and `critical`, `high`, `medium`.
+- `scripts/validate.py`: the frontmatter and `agents/openai.yaml` go through a YAML parser (a duplicate key is an error); `evals.json` types are validated with a readable error; symlinks are rejected without reading their destination; fixtures are limited to relative paths in `evals/files`; unexpected failures become errors, not tracebacks.
+- Eval 6: the agent must ask which same-name skill is the target before editing; `allowed_changes` is empty.
+- `README.md` rewritten; `agents/openai.yaml` converted to LF; `.gitattributes` added.
 
-- `LICENSE` (MIT), `CONTRIBUTING.md` e `SECURITY.md`.
-- Matriz de CI (Python 3.11, 3.12 e 3.13), badge de status, `RELEASING.md` e `.github/pull_request_template.md`.
-
-### Alterado
-- `scripts/validate.py`: frontmatter e `agents/openai.yaml` passam por parser YAML (chave duplicada é erro); tipos de `evals.json` validados com erro legível; symlinks rejeitados sem leitura do destino; fixtures restritas a caminhos relativos em `evals/files`; falhas inesperadas viram erro, não traceback.
-- Eval 6: o agente deve perguntar qual homônimo é o alvo antes de editar; `allowed_changes` vazio.
-- `evals/evals.json`: todos os cenários têm `type`, `objective`, `expectations`, `forbidden`, `allowed_changes` e `severity_if_failed`.
-- `README.md` reescrito; `agents/openai.yaml` convertido para LF; `.gitattributes` adicionado.
-
-### Pendente
-- Execução real dos 21 cenários com e sem a skill.
-- Verificação de 6 das 7 fontes externas.
-- Validação do host principal (Claude Code): instalação, descoberta, invocação e smoke test.
-- Decisão sobre o nome do repositório contra o `name` da skill.
-- Habilitar o relato privado de vulnerabilidades e a proteção de branch no GitHub (configurações do repositório).
+### Pending
+- Real execution of the 21 scenarios with and without the skill.
+- Checking 6 of the 7 external sources.
+- Validating the primary host (Claude Code): installation, discovery, invocation, and smoke test.
+- Deciding the repository name versus the skill's `name`.
+- Enabling private vulnerability reporting and branch protection on GitHub (repository settings).

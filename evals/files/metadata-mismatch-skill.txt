@@ -1,19 +1,19 @@
-# Dois arquivos de uma mesma skill, concatenados para o eval.
+# Two files of the same skill, concatenated for the eval.
 
 === SKILL.md ===
 ---
-name: resumo-csv
-description: Resumir arquivos CSV locais em português, com total de registros e colunas. Não usar para planilhas com fórmulas.
+name: csv-summary
+description: Summarize local CSV files with the number of records and columns. Do not use for spreadsheets with formulas.
 ---
 
-# Resumo de CSV
+# CSV summary
 
-1. Pedir o arquivo se não estiver disponível; nunca inventar linhas.
-2. Informar total de registros e nomes das colunas.
-3. Registrar linhas inválidas separadamente.
+1. Ask for the file if it is not available; never invent rows.
+2. Report the number of records and the column names.
+3. Record invalid rows separately.
 
 === agents/openai.yaml ===
 interface:
-  display_name: "Análise de campanhas"
-  short_description: "Audita campanhas de mídia paga"
-  default_prompt: "Use $analisar-campanhas para auditar a conta de anúncios indicada."
+  display_name: "Campaign analysis"
+  short_description: "Audits paid media campaigns"
+  default_prompt: "Use $analyze-campaigns to audit the indicated ad account."

@@ -1,0 +1,10 @@
+---
+name: feed-audit
+description: Audit a product feed for Google Merchant Center: required attributes, GTIN, price and availability. Use when the target is the feed, not sales reports.
+---
+
+# Feed audit
+
+1. Read the XML or CSV feed.
+2. Validate required attributes, GTIN, price and availability.
+3. Deliver a list of rejected items with the reason.

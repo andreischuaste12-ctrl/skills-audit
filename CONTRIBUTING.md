@@ -1,8 +1,8 @@
-# Contribuindo
+# Contributing
 
-Contribuições são bem-vindas. Idioma dos documentos e das mensagens: português do Brasil, com termos técnicos em inglês.
+Contributions are welcome. Language of documents and messages: English.
 
-## Antes de abrir um PR
+## Before opening a PR
 
 ```bash
 pip install -r requirements-dev.txt
@@ -10,17 +10,17 @@ python3 scripts/validate.py
 python3 -m unittest discover -s scripts -p "test_*.py"
 ```
 
-Os dois comandos precisam passar. O CI roda a mesma verificação em Python 3.11, 3.12 e 3.13.
+Both commands must pass. CI runs the same checks on Python 3.11, 3.12, and 3.13.
 
-## Regras
+## Rules
 
-- Preencha o checklist de `.github/pull_request_template.md`.
-- Mudança que altera o comportamento da skill (descrição, fluxo, referências, fixtures ou critérios) exige reexecutar os cenários afetados, com e sem a skill, e registrar em `evals/RESULTS.md`. A tabela de `RELEASING.md` diz quais.
-- Não declare melhoria, ganho percentual ou compatibilidade de host sem execução registrada.
-- Fixtures de `evals/files/` usam extensão `.txt` e nunca o nome `SKILL.md`, para não serem descobertas como skills. Nada de credenciais reais: use valores obviamente falsos e domínios `.invalid`.
-- O validador rejeita symlinks e caminhos fora de `evals/files`. Não tente contornar essas regras.
-- Não adicione dependências de runtime. A única dependência de desenvolvimento é a de `requirements-dev.txt`.
+- Fill in the checklist in `.github/pull_request_template.md`.
+- A change that alters the skill's behavior (description, workflow, references, fixtures, or criteria) requires re-running the affected scenarios, with and without the skill, and recording them in `evals/RESULTS.md`. The table in `RELEASING.md` says which.
+- Do not claim an improvement, a percentage gain, or host compatibility without a recorded execution.
+- Fixtures in `evals/files/` use the `.txt` extension and never the name `SKILL.md`, so they are not discovered as skills. No real credentials: use obviously fake values and `.invalid` domains.
+- The validator rejects symlinks and paths outside `evals/files`. Do not try to work around these rules.
+- Do not add runtime dependencies. The only development dependency is the one in `requirements-dev.txt`.
 
-## Segurança
+## Security
 
-Para vulnerabilidades, veja `SECURITY.md`; não abra issue pública com detalhes exploráveis.
+For vulnerabilities, see `SECURITY.md`; do not open a public issue with exploitable details.

@@ -2,64 +2,64 @@
 
 [![validate](https://github.com/andreischuaste12-ctrl/skills-audit/actions/workflows/validate.yml/badge.svg)](https://github.com/andreischuaste12-ctrl/skills-audit/actions/workflows/validate.yml)
 
-Skill `improve-skills-konvert`: auditoria e melhoria de skills de agentes de IA, baseada em evidências. Analisa ativação, fluxo, referências, segurança e cobertura de avaliação; pesquisa lacunas materiais; e recomenda manter, melhorar, dividir, unificar ou retirar de uso cada skill.
+The `improve-skills-konvert` skill: evidence-based auditing and improvement of AI agent skills. It reviews activation, workflow, references, security, and evaluation coverage; researches material gaps; and recommends whether each skill should be kept, improved, split, merged, or retired.
 
-Idioma: português do Brasil (termos técnicos em inglês). Versão: não publicada (ver `CHANGELOG.md`).
+Language: English. The skill responds in the language of the user's request. Version: unreleased (see `CHANGELOG.md`).
 
-## Escopo
+## Scope
 
-Decisões de escopo, definidas pelo mantenedor em 30/10/2026:
+Scope decisions, set by the maintainer on 2026-10-30:
 
-- **Público:** projeto open source público, para quem mantém skills pessoais ou de equipe e precisa decidir o que corrigir, unificar ou aposentar. Contribuições seguem `CONTRIBUTING.md`; vulnerabilidades, `SECURITY.md`.
-- **Host principal:** Claude Code. Codex é alvo secundário, pela presença de `agents/openai.yaml`. Nenhum dos dois tem compatibilidade comprovada por execução (ver "Estado de verificação"). Compatibilidade de formato (os arquivos seguem a estrutura de skill) não é compatibilidade de comportamento (o agente se comporta como esperado).
-- **Entregável padrão:** achados com local, evidência, severidade e confiança; recomendação por skill; mudanças feitas; verificações executadas e não executadas.
+- **Audience:** a public open source project, for people who maintain personal or team skills and need to decide what to fix, merge, or retire. Contributions follow `CONTRIBUTING.md`; vulnerabilities, `SECURITY.md`.
+- **Primary host:** Claude Code. Codex is a secondary target, because of `agents/openai.yaml`. Neither has compatibility proven by execution (see "Verification status"). Format compatibility (the files follow the skill structure) is not behavior compatibility (the agent behaves as expected).
+- **Default deliverable:** findings with location, evidence, severity, and confidence; a recommendation per skill; changes made; checks run and not run.
 
-### Esta skill ou `skill-creator`?
+### This skill or `skill-creator`?
 
-| Pedido | Destino |
+| Request | Destination |
 | --- | --- |
-| Diagnosticar, revisar ou otimizar uma skill existente | Esta skill |
-| Comparar skills, detectar duplicidade, decidir unificar | Esta skill |
-| Validar regressão após alterar uma skill | Esta skill |
-| Criar uma skill do zero | `skill-creator` |
-| Edição pontual sem auditoria (ex.: trocar `default_prompt`) | `skill-creator` |
-| Auditar site, SEO ou código sem skill como alvo | Nenhuma das duas |
+| Diagnose, review, or optimize an existing skill | This skill |
+| Compare skills, detect duplication, decide whether to merge | This skill |
+| Validate regressions after changing a skill | This skill |
+| Create a skill from scratch | `skill-creator` |
+| One-off edit without an audit (e.g., changing `default_prompt`) | `skill-creator` |
+| Audit a website, SEO, or code with no skill as the target | Neither |
 
-Se `skill-creator` não estiver disponível, a skill informa isso e oferece instalá-lo ou seguir com o fluxo de auditoria por escolha explícita; não executa a auditoria completa em silêncio.
+If `skill-creator` is not available, the skill says so and offers to install it or to continue with the audit workflow by explicit choice; it does not run the full audit silently.
 
-## Estrutura
+## Structure
 
-| Caminho | Função |
+| Path | Role |
 | --- | --- |
-| `SKILL.md` | Fluxo em 6 etapas: alvo, inspeção, pesquisa, melhorias, verificação, entrega |
-| `references/audit-criteria.md` | Critérios de auditoria, prioridades e esquema único de achado |
-| `references/research-and-validation.md` | Quando e até onde pesquisar, níveis de validação, fontes e sua manutenção |
-| `references/colecoes-e-unificacao.md` | Protocolo para coleções: inventário, sobreposição, destino e unificação |
-| `agents/openai.yaml` | Metadados de interface (Codex/OpenAI) |
-| `evals/evals.json` | 21 cenários com asserções, comportamentos proibidos e gravidade |
-| `evals/files/` | Fixtures dos cenários (extensão `.txt`, para não serem descobertas como skills) |
-| `evals/RESULTS.md` | Critérios de aprovação, falhas críticas e registro de execuções |
-| `scripts/validate.py`, `scripts/test_validate.py` | Validação estrutural e seus testes |
-| `requirements-dev.txt` | Dependência de desenvolvimento do validador (PyYAML, versão fixada) |
-| `LICENSE`, `CONTRIBUTING.md`, `SECURITY.md` | Licença MIT, guia de contribuição e política de segurança |
-| `CHANGELOG.md` | Histórico de mudanças |
-| `RELEASING.md` | Versionamento, critérios de release e o que exige reexecução dos evals |
-| `.github/pull_request_template.md` | Checklist de PR |
+| `SKILL.md` | Six-step workflow: target, inspection, research, improvements, verification, delivery |
+| `references/audit-criteria.md` | Audit criteria, priorities, and the single finding schema |
+| `references/research-and-validation.md` | When and how far to research, validation levels, sources and their upkeep |
+| `references/collections-and-merging.md` | Collection protocol: inventory, overlap, fate, and merging |
+| `agents/openai.yaml` | Interface metadata (Codex/OpenAI) |
+| `evals/evals.json` | 21 scenarios with assertions, forbidden behaviors, and severity |
+| `evals/files/` | Scenario fixtures (`.txt` extension, so they are not discovered as skills) |
+| `evals/RESULTS.md` | Pass criteria, critical failures, and the record of runs |
+| `scripts/validate.py`, `scripts/test_validate.py` | Structural validation and its tests |
+| `requirements-dev.txt` | The validator's development dependency (PyYAML, pinned) |
+| `LICENSE`, `CONTRIBUTING.md`, `SECURITY.md` | MIT license, contribution guide, and security policy |
+| `CHANGELOG.md` | Change history |
+| `RELEASING.md` | Versioning, release criteria, and what requires re-running the evals |
+| `.github/pull_request_template.md` | PR checklist |
 
-## Instalação e atualização
+## Installation and updating
 
-O nome da skill (`improve-skills-konvert`) é o que o host usa; o nome deste repositório (`skills-audit`) é só do projeto. Instale copiando o pacote para uma pasta com o nome da skill:
+The skill name (`improve-skills-konvert`) is what the host uses; this repository's name (`skills-audit`) belongs to the project only. Install by copying the package into a folder named after the skill:
 
 ```bash
 mkdir -p ~/.claude/skills/improve-skills-konvert
 cp -r SKILL.md agents references evals scripts ~/.claude/skills/improve-skills-konvert/
 ```
 
-O repositório é a fonte do pacote. Em uso, a skill precisa de `SKILL.md`, `references/` e `agents/`; `evals/` e `scripts/` são ativos de manutenção, e o `SKILL.md` aponta para `evals/` (se omitir a pasta, esses links ficam quebrados na cópia instalada). Para atualizar, repita a cópia sobre a pasta instalada, sem criar uma segunda instalação. O diretório de skills de outros hosts pode ser diferente; confirme na documentação do host. O validador emite um aviso (não um erro) quando a pasta do repositório difere do `name`, porque a documentação do Claude Code não exige que coincidam.
+The repository is the source of the package. In use, the skill needs `SKILL.md`, `references/`, and `agents/`; `evals/` and `scripts/` are maintenance assets, and `SKILL.md` links to `evals/` (if you omit that folder, those links are broken in the installed copy). To update, repeat the copy over the installed folder without creating a second installation. Other hosts' skills directories may differ; confirm in the host's documentation. The validator emits a warning (not an error) when the repository folder differs from the `name`, because the Claude Code documentation does not require them to match.
 
-## Validação
+## Validation
 
-Requer Python 3 e PyYAML (somente para desenvolvimento, versão fixada em `requirements-dev.txt`). Testado localmente em Python 3.11, 3.12 e 3.13 com PyYAML 6.0.2; o CI roda a mesma matriz. Outras versões não foram testadas.
+Requires Python 3 and PyYAML (development only, pinned in `requirements-dev.txt`). Tested locally on Python 3.11, 3.12, and 3.13 with PyYAML 6.0.2; CI runs the same matrix. Other versions were not tested.
 
 ```bash
 pip install -r requirements-dev.txt
@@ -67,47 +67,47 @@ python3 scripts/validate.py
 python3 -m unittest discover -s scripts -p "test_*.py"
 ```
 
-O primeiro comando analisa o frontmatter e `agents/openai.yaml` com parser YAML (chave duplicada é erro) e confere tipos, links, caminhos citados, evals (estrutura, tipos, campos condicionais), fixtures (somente caminhos relativos dentro de `evals/files`), fim de linha e a descrição. Qualquer symlink é erro e o destino não é lido. Cada problema sai com arquivo e motivo; JSON ou YAML com estrutura errada produz erro legível, nunca traceback. Sem PyYAML, o validador termina com código 2 e a instrução de instalação. O segundo comando injeta defeitos de propósito e confere que o validador os detecta.
+The first command parses the frontmatter and `agents/openai.yaml` with a YAML parser (a duplicate key is an error) and checks types, links, cited paths, evals (structure, types, conditional fields), fixtures (relative paths inside `evals/files` only), line endings, and the description. Any symlink is an error and its destination is not read. Each problem is reported with a file and a reason; JSON or YAML with the wrong structure produces a readable error, never a traceback. Without PyYAML, the validator exits with code 2 and installation instructions. The second command injects defects on purpose and checks that the validator detects them.
 
-## Estado de verificação
+## Verification status
 
-| Nível | O que é | Estado |
+| Level | What it is | Status |
 | --- | --- | --- |
-| Estrutural | Arquivos, YAML, JSON, links, metadados | Automatizado. O workflow `validate` passou nos commits `bffb94f` e `005bc20` (conferido em 30/10/2026); a versão atual do validador ainda precisa passar no CI após o push |
-| Walkthrough | Fluxo aplicado manualmente a um cenário | Não registrado |
-| Execução comportamental | Agente roda o cenário no host, com e sem a skill | **Não registrada** (ver `evals/RESULTS.md`) |
+| Structural | Files, YAML, JSON, links, metadata | Automated. The `validate` workflow passed on commits `bffb94f`, `005bc20`, and `cc93212` (checked on 2026-10-30), the last on Python 3.11, 3.12, and 3.13; the current commit still has to pass CI after the push |
+| Walkthrough | The workflow applied manually to a scenario | Not recorded |
+| Behavioral execution | An agent runs the scenario on the host, with and without the skill | **Not recorded** (see `evals/RESULTS.md`) |
 
-Cenário de avaliação não é execução: enquanto não houver linhas em `evals/RESULTS.md`, não há evidência de desempenho nem de compatibilidade de host.
+An evaluation scenario is not an execution: until there are rows in `evals/RESULTS.md`, there is no evidence of performance or of host compatibility.
 
-### Hosts validados
+### Validated hosts
 
-Nenhum. Um host só entra nesta tabela depois de instalação, descoberta e invocação testadas, com o smoke test registrado.
+None. A host enters this table only after installation, discovery, and invocation have been tested, with the smoke test recorded.
 
-| Host | Procedimento de instalação | Descoberta | Invocação | Smoke test | Data |
+| Host | Installation procedure | Discovery | Invocation | Smoke test | Date |
 | --- | --- | --- | --- | --- | --- |
-| Claude Code (principal) | não testado | não testada | não testada | não executado | – |
-| Codex (secundário) | não testado | não testada | não testada | não executado | – |
+| Claude Code (primary) | not tested | not tested | not tested | not run | – |
+| Codex (secondary) | not tested | not tested | not tested | not run | – |
 
-Se só um host for testado, ele será declarado como o único host validado.
+If only one host is tested, it will be declared the only validated host.
 
-## Limitações conhecidas
+## Known limitations
 
-- Sem execução comportamental registrada.
-- 6 das 7 fontes de `references/research-and-validation.md` não foram abertas na última conferência (30/10/2026); só a documentação do Claude Code foi lida, parcialmente.
-- A proteção de branch exigindo o check `validate` é configuração do GitHub e não foi verificada.
-- O CI valida só a estrutura; validar o comportamento exige um agente e custa tokens, então roda manualmente (ver `RELEASING.md`), não a cada PR.
-- As ações do workflow usam tags (`@v4`, `@v5`), não SHAs imutáveis.
+- No behavioral execution recorded.
+- 6 of the 7 sources in `references/research-and-validation.md` were not opened at the last check (2026-10-30); only the Claude Code documentation was read, partially.
+- Branch protection requiring the `validate` checks is a GitHub setting and was not verified.
+- CI validates structure only; validating behavior needs an agent and costs tokens, so it runs manually (see `RELEASING.md`), not on every PR.
+- The workflow actions use tags (`@v4`, `@v5`), not immutable SHAs.
 
-## Publicar uma alteração
+## Publishing a change
 
-Detalhes e critérios de versão em `RELEASING.md`. Resumo:
+Details and versioning criteria are in `RELEASING.md`. Summary:
 
-1. Rodar os dois comandos de validação.
-2. Se mudou `SKILL.md`, referências, fixtures ou critérios, rodar os cenários afetados com e sem a skill e registrar em `evals/RESULTS.md`.
-3. Bloquear a publicação se houver erro estrutural ou falha crítica (lista em `evals/RESULTS.md`).
-4. Atualizar `CHANGELOG.md` e registrar as limitações da versão.
-5. Conferir o resultado do workflow `validate` no commit publicado e, para tornar a verificação obrigatória, exigir os checks do job `structure` (um por versão do Python) na proteção de branch do GitHub.
+1. Run the two validation commands.
+2. If you changed `SKILL.md`, references, fixtures, or criteria, run the affected scenarios with and without the skill and record them in `evals/RESULTS.md`.
+3. Block publication on a structural error or a critical failure (list in `evals/RESULTS.md`).
+4. Update `CHANGELOG.md` and record the version's limitations.
+5. Check the result of the `validate` workflow on the published commit and, to make the check mandatory, require the `structure` job checks (one per Python version) in GitHub branch protection.
 
-## Licença
+## License
 
 [MIT](LICENSE).
