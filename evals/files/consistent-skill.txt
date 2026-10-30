@@ -1,0 +1,12 @@
+---
+name: checklist-lancamento
+description: Montar checklist de lançamento de página de campanha a partir do briefing: UTMs, tracking, SEO básico e QA. Usar quando o usuário fornecer um briefing de campanha. Não usar para auditar páginas já publicadas.
+---
+
+# Checklist de lançamento
+
+1. Ler o briefing; se faltar a URL final ou o objetivo, perguntar só por esses dois itens.
+2. Listar UTMs por canal usando a convenção do briefing; sem convenção, propor `utm_source`, `utm_medium` e `utm_campaign` e marcar como suposição.
+3. Listar eventos de tracking citados no briefing. Não inventar nomes de evento.
+4. Listar verificações de SEO básico (title, canonical, indexação) e de QA (mobile, formulário, links).
+5. Entregar o checklist com responsável vazio e critério de aceite por item.

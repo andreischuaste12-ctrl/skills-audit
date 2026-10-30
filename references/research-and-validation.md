@@ -6,6 +6,13 @@ Partir do objetivo e dos achados: a regra ainda vale? O endpoint existe nessa ve
 
 Relacionar cada pergunta a uma possível mudança e uma forma de verificação. Não pesquisar todo o setor sem conexão com decisões do fluxo.
 
+## Quando pesquisar e até onde
+
+- **Dispensam busca externa:** link quebrado, contradição interna, instrução insegura, frontmatter inválido e qualquer defeito comprovável no próprio arquivo.
+- **Exigem busca externa:** regra de plataforma, versão ou assinatura de API, política de região, limite ou campo específico de host, e qualquer afirmação factual que a skill auditada faça sobre o mundo.
+- **Limite padrão:** no máximo uma pergunta verificável por achado que dependa de fonte externa, e uma fonte primária por pergunta. Ampliar só quando a fonte for ambígua, estiver desatualizada ou divergir de outra fonte primária, e registrar o motivo da ampliação.
+- **Parada:** encerrar quando cada decisão material tiver fonte ou reprodução e cada incerteza restante estiver registrada como pendente.
+
 ## Buscar e confrontar evidências
 
 1. Inspecionar documentação, código, testes e exemplos locais aplicáveis.
@@ -46,12 +53,23 @@ Comparar versões com os mesmos inputs e condições controladas. Se possível, 
 
 ## Fontes oficiais de partida
 
-Revisadas em 26/10/2026. Reabra a documentação ao depender de versões, suporte do host ou estado de produto; esta lista não substitui pesquisa da área de domínio da skill auditada. Não trate uma especificação portátil como garantia de suporte idêntico em Codex, Claude Code, API ou plugins.
+Revisadas em 26/10/2026. Gatilho de revisão: reconferir a lista a cada 90 dias ou antes, quando um host mudar de versão. Reabra a documentação ao depender de versões, suporte do host ou estado de produto; esta lista não substitui pesquisa da área de domínio da skill auditada. Não trate uma especificação portátil como garantia de suporte idêntico em Codex, Claude Code, API ou plugins.
 
-- [OpenAI — Skills](https://developers.openai.com/api/docs/guides/tools-skills): formato, descoberta e organização de recursos para skills na API. Use essa página para aspectos da API; confirme à parte as convenções do ambiente local.
-- [OpenAI — Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra): descrições curtas e precisas, divulgação progressiva e risco de instruções redundantes ou excessivas. São recomendações do produto/modelo descrito; não as apresente como regra universal do padrão.
-- [Claude Code — Skills](https://code.claude.com/docs/en/skills): comportamento específico de frontmatter, descoberta, invocação e arquivos auxiliares no Claude Code. Confira campos e limites antes de editar metadados destinados a esse host.
-- [Agent Skills — Specification](https://agentskills.io/specification): estrutura e campos portáteis do formato. Distinguir requisito da especificação de suporte concreto por host.
-- [Agent Skills — Best practices for skill creators](https://agentskills.io/skill-creation/best-practices): conhecimento de execução, detalhe proporcional, divulgação progressiva e uso de padrões recomendados em vez de menus.
-- [Agent Skills — Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills): casos realistas, baseline sem skill ou com versão anterior e avaliação por comparação.
-- [OpenAI — Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices): objetivos, conjuntos de casos e critérios verificáveis. A página informa mudanças de disponibilidade da plataforma Evals; verifique o aviso atual antes de recomendar API ou produto, e prefira avaliações locais compatíveis quando o usuário só precisa validar uma skill.
+Estar nesta lista não significa que a fonte foi consultada em uma auditoria: cite uma fonte como consultada apenas se a página foi aberta naquela execução. Se uma fonte não puder ser acessada, registre isso no relatório e mantenha a decisão como pendente.
+
+| Fonte | Tipo | Para que serve | Conferência registrada |
+| --- | --- | --- | --- |
+| [Agent Skills: Specification](https://agentskills.io/specification) | Normativa (formato portátil) | Estrutura e campos portáteis. Distinguir requisito da especificação de suporte concreto por host. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+| [Claude Code: Skills](https://code.claude.com/docs/en/skills) | Documentação de host | Frontmatter, descoberta, invocação e arquivos auxiliares no Claude Code. | Aberta em 30/10/2026: `description` e `when_to_use` somam até 1.536 caracteres na listagem; `name` não precisa coincidir com a pasta; campos desconhecidos são ignorados. Em claude.ai e na Skills API, só `name`, `description`, `license`, `compatibility`, `metadata` e `allowed-tools` são aceitos. Parte final da página não lida. |
+| [OpenAI: Skills](https://developers.openai.com/api/docs/guides/tools-skills) | Documentação de plataforma | Formato, descoberta e organização de recursos para skills na API. Confirme à parte as convenções do ambiente local. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+| [Agent Skills: Best practices for skill creators](https://agentskills.io/skill-creation/best-practices) | Recomendação | Conhecimento de execução, detalhe proporcional, divulgação progressiva e padrões recomendados em vez de menus. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+| [Agent Skills: Evaluating skill output quality](https://agentskills.io/skill-creation/evaluating-skills) | Recomendação | Casos realistas, baseline sem skill ou com versão anterior e avaliação por comparação. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+| [OpenAI: Rethinking skills and prompts for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra) | Recomendação do produto/modelo descrito (não regra universal) | Descrições curtas e precisas, divulgação progressiva e risco de instruções redundantes ou excessivas. | Não acessada em 30/10/2026 (host fora da rede liberada). Conferir a existência da página antes de depender dela. |
+| [OpenAI: Evaluation best practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices) | Recomendação / documentação de plataforma | Objetivos, conjuntos de casos e critérios verificáveis. A página informa mudanças de disponibilidade da plataforma Evals; verifique o aviso atual antes de recomendar API ou produto e prefira avaliações locais compatíveis quando o usuário só precisa validar uma skill. | Não acessada em 30/10/2026 (host fora da rede liberada). |
+
+### Manutenção das fontes
+
+- Ao incluir uma fonte, registrar o motivo de uso, o tipo (normativa, documentação de host, recomendação) e a data da conferência.
+- Ao depender de uma fonte em uma auditoria, reabrir a página e anotar data e versão quando a informação variar por produto ou host.
+- Separar regra normativa de recomendação ao justificar uma mudança. Recomendação sustenta melhoria opcional, não defeito.
+- Um verificador automático de links detecta URL inválida, mas não prova que o conteúdo é atual nem aplicável.

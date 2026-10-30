@@ -1,0 +1,10 @@
+---
+name: criar-skills
+description: Orientar a escrita de metadados de skills. Usar quando o usuário pedir ajuda com frontmatter.
+---
+
+# Criar skills
+
+1. Escrever `description` com no máximo 100 caracteres, pois descrições maiores são sempre ignoradas.
+2. O campo `name` deve sempre coincidir com o nome da pasta em qualquer host.
+3. Todos os hosts aceitam os mesmos campos de frontmatter.

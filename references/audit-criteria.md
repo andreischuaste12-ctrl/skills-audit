@@ -64,4 +64,19 @@ Selecionar os itens aplicáveis ao alvo. Não adicionar todas as verificações 
 | Média | Falha frequente ou cobertura relevante ausente | Ignorar paginação; confundir dois domínios |
 | Baixa | Melhoria demonstrável de manutenção ou contexto | Repetição que ocupa o corpo sem orientar decisões |
 
-Registrar arquivo/trecho, condição de ocorrência, observação ou hipótese, impacto, sustentação e teste de aceitação. Um critério sem problema observado não precisa virar achado.
+## Esquema único de achado
+
+Todo achado usa os mesmos campos, no relatório detalhado e no resumo:
+
+| Campo | Conteúdo |
+| --- | --- |
+| Local | Arquivo e trecho ou linha |
+| Condição | Quando ocorre |
+| Severidade | Crítica, Alta, Média ou Baixa (tabela acima) |
+| Confiança | Defeito demonstrado, risco provável ou melhoria opcional. Separada da severidade: um risco provável pode ser Crítico, e um defeito demonstrado pode ser Baixo |
+| Impacto | Efeito sobre o uso, o resultado ou a segurança |
+| Evidência | Observação reproduzível ou fonte; hipótese marcada como tal |
+| Correção | Alteração mínima proposta |
+| Teste de aceitação | Resultado observável que confirma a correção |
+
+No resumo final, encadeie `achado → evidência → alteração → verificação`. Um critério sem problema observado não precisa virar achado.

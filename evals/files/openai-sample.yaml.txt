@@ -1,0 +1,7 @@
+interface:
+  display_name: "Resumo de CSV"
+  short_description: "Resume arquivos CSV locais"
+  default_prompt: "Use $summarize-csv para resumir o CSV indicado."
+  icon_small: "./assets/icon-small.svg"
+policy:
+  allow_implicit_invocation: false

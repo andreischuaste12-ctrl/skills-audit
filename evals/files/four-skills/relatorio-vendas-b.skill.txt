@@ -1,0 +1,10 @@
+---
+name: relatorio-vendas-b
+description: Resumir vendas da semana de uma loja online a partir de planilha de pedidos: faturamento, ticket médio e produtos mais vendidos.
+---
+
+# Relatório de vendas B
+
+1. Abrir a planilha de pedidos.
+2. Calcular faturamento, ticket médio e dez produtos mais vendidos.
+3. Entregar tabela em Markdown.

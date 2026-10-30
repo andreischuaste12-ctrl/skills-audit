@@ -1,0 +1,11 @@
+<!-- origem: ~/.claude/skills/summarize/SKILL.md (escopo pessoal, editável pelo usuário) -->
+---
+name: summarize
+description: Resumir documentos longos em português, em até dez tópicos, com citação da página de origem. Usar quando o usuário anexar um PDF ou texto e pedir resumo.
+---
+
+# Resumir
+
+1. Ler o documento inteiro.
+2. Listar até dez tópicos, cada um com a página de origem.
+3. Sinalizar trechos ilegíveis em vez de preenchê-los.

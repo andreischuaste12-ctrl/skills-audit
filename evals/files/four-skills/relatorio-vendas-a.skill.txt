@@ -1,0 +1,10 @@
+---
+name: relatorio-vendas-a
+description: Gerar relatório semanal de vendas de e-commerce a partir de CSV de pedidos, com receita, ticket médio e top produtos.
+---
+
+# Relatório de vendas A
+
+1. Ler o CSV de pedidos.
+2. Calcular receita, ticket médio e top dez produtos.
+3. Entregar tabela em Markdown.

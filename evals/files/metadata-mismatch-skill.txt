@@ -1,0 +1,19 @@
+# Dois arquivos de uma mesma skill, concatenados para o eval.
+
+=== SKILL.md ===
+---
+name: resumo-csv
+description: Resumir arquivos CSV locais em português, com total de registros e colunas. Não usar para planilhas com fórmulas.
+---
+
+# Resumo de CSV
+
+1. Pedir o arquivo se não estiver disponível; nunca inventar linhas.
+2. Informar total de registros e nomes das colunas.
+3. Registrar linhas inválidas separadamente.
+
+=== agents/openai.yaml ===
+interface:
+  display_name: "Análise de campanhas"
+  short_description: "Audita campanhas de mídia paga"
+  default_prompt: "Use $analisar-campanhas para auditar a conta de anúncios indicada."

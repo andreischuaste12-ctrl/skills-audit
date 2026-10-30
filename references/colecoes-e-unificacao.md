@@ -15,7 +15,7 @@ Inspecione apenas o conjunto indicado e dependências diretamente referenciadas.
 | Ativos | Referências, scripts, templates, dependências, avaliações e integrações |
 | Uso cruzado | Skills chamadas, citadas, duplicadas ou necessárias como encaminhamento |
 
-Não trate cópias de auditoria, exemplos, backups, caches ou diretórios de dependências como instalações ativas. Resolva junctions/symlinks e origem antes de recomendar edição, remoção ou instalação.
+Não trate cópias de auditoria, exemplos, backups, caches ou diretórios de dependências como instalações ativas. Resolva links simbólicos (junctions, no Windows) e origem antes de recomendar edição, remoção ou instalação.
 
 ## 2. Medir sobreposição por fluxo
 
@@ -50,7 +50,7 @@ Antes de editar, monte um mapa de migração: skill de origem → conteúdo/ativ
 1. Escolha a fonte canônica pelo contexto do usuário, qualidade, compatibilidade e origem editável; não instale uma terceira cópia.
 2. Combine apenas instruções comprovadamente comuns. Mantenha regras específicas em módulos carregados sob condição explícita.
 3. Atualize nome, descrição, frontmatter, prompt da interface, avaliações, links internos, referências de outras skills e vínculos de descoberta que estejam no escopo autorizado.
-4. Preserve nome de comando, pacote ou endpoint externo quando renomear quebrar a integração. A identidade pessoal da skill pode usar o sufixo `-konvert`, conforme as instruções globais.
+4. Preserve nome de comando, pacote ou endpoint externo quando renomear quebrar a integração. Se as coleções do usuário seguem uma convenção de nomes (por exemplo, um sufixo pessoal), mantenha-a nos nomes que forem criados ou renomeados.
 5. Não apague os originais durante a unificação. Deixe-os intactos até que o usuário autorize a retirada e até que referências, instalação e consumidores tenham sido conferidos.
 
 Se a única melhoria segura for corrigir roteamento, não force uma unificação: aplique a correção mínima de descrições, limites e referências.
