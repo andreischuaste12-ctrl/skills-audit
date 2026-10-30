@@ -1,0 +1,4 @@
+interface:
+  display_name: "Auditoria e melhoria de skills"
+  short_description: "Audita e consolida skills com evidências"
+  default_prompt: "Use $improve-skills-konvert para analisar a skill indicada, pesquisar fontes confiáveis e aplicar melhorias verificáveis preservando seu propósito."
