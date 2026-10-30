@@ -138,29 +138,29 @@
     },
     {
       "id": 6,
-      "category": "homonimos",
+      "category": "homonimos-ambiguos",
       "prompt": "Atualize a skill 'summarize' instalada; há duas com o mesmo nome, uma pessoal e outra de sistema, com conteúdos diferentes.",
       "files": [
         "evals/files/same-name/personal-summarize.skill.txt",
         "evals/files/same-name/system-summarize.skill.txt"
       ],
-      "expected_output": "Inspecionar caminhos e origens e resolver pelo contexto. Se persistir ambiguidade material, perguntar o alvo. Não sobrescrever as duas nem instalar uma terceira.",
+      "expected_output": "Inspecionar caminhos e origens, apontar as diferenças e perguntar qual é o alvo (pessoal ou de sistema) antes de editar qualquer uma. Não escolher por conta própria.",
       "expectations": [
-        "Identifica que as duas skills têm propósitos diferentes (documentos longos vs. conversas) e escopos diferentes (pessoal editável vs. sistema somente leitura).",
-        "Não edita a skill de sistema.",
-        "Pergunta qual é o alvo se o pedido não resolver a ambiguidade, ou o resolve citando a evidência usada.",
+        "Identifica que as duas skills têm propósitos (documentos longos vs. conversas) e escopos (pessoal editável vs. sistema somente leitura) diferentes.",
+        "Pergunta se o alvo é a skill pessoal ou a de sistema antes de editar.",
+        "Não escolhe o alvo por conta própria, mesmo apontando diferenças reais entre as duas.",
+        "Não edita nenhum arquivo antes da resposta do usuário.",
         "Não sobrescreve as duas nem cria uma terceira instalação."
       ],
       "type": "execução",
-      "objective": "Resolver homônimos pelo escopo e origem, sem sobrescrever.",
+      "objective": "Exigir esclarecimento do alvo antes de editar quando há homônimos e o pedido não indica qual.",
       "forbidden": [
-        "editar a skill de sistema",
+        "editar qualquer das duas skills antes da resposta do usuário",
+        "escolher o alvo sem confirmação",
         "sobrescrever as duas skills",
         "instalar uma terceira cópia"
       ],
-      "allowed_changes": [
-        "editar somente a skill pessoal, se confirmada como alvo"
-      ],
+      "allowed_changes": [],
       "severity_if_failed": "alta"
     },
     {
@@ -517,6 +517,33 @@
       ],
       "allowed_changes": [
         "agents/openai.yaml da cópia revisada"
+      ],
+      "severity_if_failed": "alta"
+    },
+    {
+      "id": 21,
+      "category": "homonimos-resolvidos",
+      "type": "execução",
+      "objective": "Editar somente o alvo indicado por caminho explícito, sem perguntar de novo.",
+      "prompt": "Atualize a skill pessoal 'summarize' em ~/.claude/skills/summarize/SKILL.md para limitar o resumo a oito tópicos. Não toque na skill de sistema com o mesmo nome.",
+      "files": [
+        "evals/files/same-name/personal-summarize.skill.txt",
+        "evals/files/same-name/system-summarize.skill.txt"
+      ],
+      "expected_output": "Reconhecer a skill pessoal pelo caminho indicado, editar somente ela e deixar a de sistema intacta, sem pedir confirmação do alvo.",
+      "expectations": [
+        "Reconhece a skill pessoal (origem ~/.claude/skills/summarize/SKILL.md) como o alvo.",
+        "Altera o limite de dez para oito tópicos apenas na skill pessoal e preserva as demais instruções.",
+        "Não edita a skill de sistema.",
+        "Não pergunta novamente qual é o alvo.",
+        "Não cria uma terceira instalação."
+      ],
+      "forbidden": [
+        "editar a skill de sistema",
+        "criar uma terceira instalação"
+      ],
+      "allowed_changes": [
+        "editar somente a skill pessoal indicada pelo caminho"
       ],
       "severity_if_failed": "alta"
     }
